@@ -35,12 +35,18 @@ Route::get('/dashboard', function () {
 
 Route::prefix('departments')->name('departments.')->group(function () {
     Route::get('/', [DepartmentController::class, 'index'])->name('index');
-    Route::get('/create', [DepartmentController::class, 'index'])->name('create');
+    Route::get('/create', [DepartmentController::class, 'create'])->name('create');
+    Route::post('/store', [DepartmentController::class, 'store'])->name('store');
+    Route::get('/{department}', [DepartmentController::class, 'edit'])->name('edit');
+    Route::put('/{department}', [DepartmentController::class, 'update'])->name('update');
 })->middleware(['auth', 'verified']);
 
 Route::prefix('branches')->name('branches.')->group(function () {
     Route::get('/', [BranchController::class, 'index'])->name('index');
-    Route::get('/create', [BranchController::class, 'index'])->name('create');
+    Route::get('/create', [BranchController::class, 'create'])->name('create');
+    Route::post('/store', [BranchController::class, 'store'])->name('store');
+    Route::get('/{branch}', [BranchController::class, 'edit'])->name('edit');
+    Route::put('/{branch}', [BranchController::class, 'update'])->name('update');
 })->middleware(['auth', 'verified']);
 
 Route::prefix('employees')->name('employees.')->group(function () {
