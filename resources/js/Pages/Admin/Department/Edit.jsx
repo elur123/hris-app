@@ -11,7 +11,7 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import { Head } from '@inertiajs/react';
 import { useForm, usePage } from '@inertiajs/react';
 
-export default function Department(props) {
+export default function Edit(props) {
     const department = usePage().props.department
 
     const { data, setData, errors, put, reset, processing, recentlySuccessful } = useForm({

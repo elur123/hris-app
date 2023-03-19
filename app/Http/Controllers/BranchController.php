@@ -11,6 +11,7 @@ use Inertia\Inertia;
 use Inertia\Response;
 
 use App\Models\Branch;
+use App\Models\Department;
 class BranchController extends Controller
 {
     
@@ -24,6 +25,8 @@ class BranchController extends Controller
                 return [
                     'id' => $branch->id,
                     'name' => $branch->name,
+                    'address' => $branch->address,
+                    'contact_no' => $branch->contact_no,
                     'created_at' => date("F j, Y, g:i a", strtotime($branch->created_at)),
                     'updated_at' => date("F j, Y, g:i a", strtotime($branch->updated_at)),
                     'actions' => [
@@ -36,13 +39,18 @@ class BranchController extends Controller
 
     public function create() : Response
     {
-        return Inertia::render('Admin/Branch/Create');
+        return Inertia::render('Admin/Branch/Create', [
+            'departments' => Department::all()
+        ]);
     }
 
     public function store(BranchStoreRequest $request) : RedirectResponse
     {
+        dd($request->all());
         Branch::create([
-            'name' => $request->name
+            'name' => $request->name,
+            'address' => $request->address,
+            'contact_no' => $request->contact_no
         ]);
 
         return Redirect::route('branches.index');
@@ -58,7 +66,9 @@ class BranchController extends Controller
     public function update(BranchUpdateRequest $request, Branch $branch): RedirectResponse
     {
         $branch->update([
-            'name' => $request->name
+            'name' => $request->name,
+            'address' => $request->address,
+            'contact_no' => $request->contact_no
         ]);
 
         return Redirect::route('branches.index');

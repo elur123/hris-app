@@ -12,7 +12,7 @@ import { Head } from '@inertiajs/react';
 import { useForm } from '@inertiajs/react';
 import { useRef } from 'react';
 
-export default function Department(props) {
+export default function Create(props) {
     const name = useRef();
 
     const { data, setData, errors, post, reset, processing, recentlySuccessful } = useForm({
@@ -27,7 +27,7 @@ export default function Department(props) {
             onSuccess: () => reset(),
             onError: () => {
                 if (errors.name) {
-                    reset('password', 'name');
+                    reset('name');
                     name.current.focus();
                 }
             },

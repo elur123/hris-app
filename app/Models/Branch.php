@@ -10,4 +10,10 @@ class Branch extends Model
     use HasFactory;
 
     protected $fillable = [ 'name', 'address', 'contact_no' ];
+
+
+    public function departments()
+    {
+        return $this->belongsToMany(Department::class, 'department_branches', 'branch_id', 'department_id');
+    }
 }
