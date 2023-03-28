@@ -27,6 +27,7 @@ class BranchController extends Controller
                     'name' => $branch->name,
                     'address' => $branch->address,
                     'contact_no' => $branch->contact_no,
+                    'departments_count' => $branch->departments()->count(),
                     'created_at' => date("F j, Y, g:i a", strtotime($branch->created_at)),
                     'updated_at' => date("F j, Y, g:i a", strtotime($branch->updated_at)),
                     'actions' => [
@@ -46,12 +47,13 @@ class BranchController extends Controller
 
     public function store(BranchStoreRequest $request) : RedirectResponse
     {
-        dd($request->all());
-        Branch::create([
+        $branch = Branch::create([
             'name' => $request->name,
             'address' => $request->address,
             'contact_no' => $request->contact_no
         ]);
+
+        $branch->departments()->sync($request->departments);
 
         return Redirect::route('branches.index');
     }
@@ -59,6 +61,7 @@ class BranchController extends Controller
     public function edit(Branch $branch) : Response
     {
         return Inertia::render('Admin/Branch/Edit', [
+            'departments' => Department::all(),
             'branch' => $branch
         ]);
     }

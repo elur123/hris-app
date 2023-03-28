@@ -28,13 +28,22 @@ export default function Create(props) {
     });
 
     const handleOnChange = (event) => {
-        setData(event.target.name, event.target.type === 'checkbox' ? event.target.checked : event.target.value);
+
+        if (event.target.checked) 
+        {
+            data.departments.push(event.target.value)
+        }
+        else 
+        {
+            let index = data.departments.indexOf(data.departments.find(e => e === event.target.value))
+            data.departments.splice(index, 1)
+        }
     };
 
     const departmentList = props.departments.map(dep => 
         <div key={dep.id} className="mb-[0.125rem] block min-h-[1.5rem] pl-[1.5rem]">
             <label className="flex items-center">
-                <Checkbox name="departments" value={data.departments} onChange={handleOnChange} />
+                <Checkbox name="departments" value={dep.id} onChange={handleOnChange} />
                 <span className="ml-2 text-sm text-gray-600">{dep.name}</span>
             </label>
         </div>

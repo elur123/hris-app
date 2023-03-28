@@ -21,6 +21,9 @@ export default function Branch(props) {
                 { branch.contact_no }
             </td>
             <td className="px-6 py-4">
+                { branch.departments_count }
+            </td>
+            <td className="px-6 py-4">
                 { branch.created_at }
             </td>
             <td className="px-6 py-4">
@@ -65,6 +68,9 @@ export default function Branch(props) {
                                     </th>
                                     <th scope="col" className="px-6 py-3">
                                         Contact #
+                                    </th>
+                                    <th scope="col" className="px-6 py-3">
+                                        # Departments
                                     </th>
                                     <th scope="col" className="px-6 py-3">
                                         Created At
