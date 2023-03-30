@@ -60,6 +60,7 @@ class BranchController extends Controller
 
     public function edit(Branch $branch) : Response
     {
+        $branch->load('departments');
         return Inertia::render('Admin/Branch/Edit', [
             'departments' => Department::all(),
             'branch' => $branch
@@ -73,6 +74,8 @@ class BranchController extends Controller
             'address' => $request->address,
             'contact_no' => $request->contact_no
         ]);
+
+        $branch->departments()->sync($request->departments);
 
         return Redirect::route('branches.index');
     }

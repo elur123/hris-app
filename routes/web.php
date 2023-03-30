@@ -51,7 +51,8 @@ Route::prefix('branches')->name('branches.')->group(function () {
 
 Route::prefix('employees')->name('employees.')->group(function () {
     Route::get('/', [EmployeeController::class, 'index'])->name('index');
-    Route::get('/create', [EmployeeController::class, 'index'])->name('create');
+    Route::get('/create', [EmployeeController::class, 'create'])->name('create');
+    Route::post('/store', [EmployeeController::class, 'store'])->name('store');
 })->middleware(['auth', 'verified']);
 
 Route::middleware('auth')->group(function () {

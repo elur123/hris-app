@@ -16,11 +16,11 @@ import { useForm, usePage } from '@inertiajs/react';
 export default function Edit(props) {
     const branch = usePage().props.branch
 
-    const { data, setData, errors, post, reset, processing, recentlySuccessful } = useForm({
+    const { data, setData, errors, put, reset, processing, recentlySuccessful } = useForm({
         name: branch.name,
         address: branch.address,
         contact_no: branch.contact_no,
-        departments: branch.departments,
+        departments: branch.departments.map(e => e.id),
     });
 
     const handleOnChange = (event) => {
@@ -36,19 +36,21 @@ export default function Edit(props) {
         }
     };
 
-    const departmentList = props.departments.map(dep => 
-        <div key={dep.id} className="mb-[0.125rem] block min-h-[1.5rem] pl-[1.5rem]">
+    const departmentList = props.departments.map(dep => {
+        let find = data.departments.find(e => e === dep.id)
+
+        return <div key={dep.id} className="mb-[0.125rem] block min-h-[1.5rem] pl-[1.5rem]">
             <label className="flex items-center">
-                <Checkbox name="departments" value={dep.id} onChange={handleOnChange} />
+                <Checkbox name="departments" value={dep.id} onChange={handleOnChange} defaultChecked={find !== undefined ? true : false} />
                 <span className="ml-2 text-sm text-gray-600">{dep.name}</span>
             </label>
         </div>
-    )
+    })
 
     const createBranch = (e) => {
         e.preventDefault();
 
-        post(route('branches.store'), {
+        put(route('branches.update', props.branch), {
             preserveScroll: true,
             onSuccess: () => reset(),
             onError: () => {

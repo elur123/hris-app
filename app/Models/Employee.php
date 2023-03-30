@@ -22,4 +22,5 @@ class Employee extends Model
         'rate_type', 
         'rate'
     ];
+
 }

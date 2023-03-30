@@ -14,7 +14,7 @@ class BranchUpdateRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255', Rule::unique(Branch::class)->ignore($this->branch->id)],
             'address' => ['required', 'string', 'max:255'],
-            'contact_no' => ['required', 'numeric', 'min:11', 'max:11']
+            'contact_no' => ['required', 'string', 'min:11', 'max:11']
         ];
     }
 }
