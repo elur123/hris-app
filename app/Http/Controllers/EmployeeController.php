@@ -23,8 +23,8 @@ class EmployeeController extends Controller
         return Inertia::render('Admin/Employee/Create');
     }
 
-    public function store() : RedirectResponse
+    public function store(Request $request) : RedirectResponse
     {
-
+        
     }
 }
