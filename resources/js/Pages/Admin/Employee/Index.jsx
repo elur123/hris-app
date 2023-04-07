@@ -9,36 +9,40 @@ import TableBody from '@/Components/TableBody'
 import { Head } from '@inertiajs/react';
 
 export default function Employee(props) {
-    const employeeData = props.employees.map((employee) => 
-        <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700" key={employee.id}>
-            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                { employee.name }
-            </th>
-            <td className="px-6 py-4">
-                { employee.created_at }
-            </td>
-            <td className="px-6 py-4">
-                { employee.created_at }
-            </td>
-            <td className="px-6 py-4">
-                { employee.created_at }
-            </td>
-            <td className="px-6 py-4">
-                { employee.created_at }
-            </td>
-            <td className="px-6 py-4">
-                { employee.created_at }
-            </td>
-            <td className="px-6 py-4">
-                { employee.updated_at }
-            </td>
-            <td className="px-6 py-4">
-                <ButtonLink href={ employees.actions.edit } className='bg-green-500 hover:text-white hover:bg-green-400'>
-                    Edit
-                </ButtonLink>
-            </td>
+    const employeeData = props.employees.length ? 
+        props.employees.map((employee) => 
+            <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700" key={employee.id}>
+                <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    { employee.name }
+                </th>
+                <td className="px-6 py-4">
+                    { employee.created_at }
+                </td>
+                <td className="px-6 py-4">
+                    { employee.created_at }
+                </td>
+                <td className="px-6 py-4">
+                    { employee.created_at }
+                </td>
+                <td className="px-6 py-4">
+                    { employee.created_at }
+                </td>
+                <td className="px-6 py-4">
+                    { employee.created_at }
+                </td>
+                <td className="px-6 py-4">
+                    { employee.updated_at }
+                </td>
+                <td className="px-6 py-4">
+                    <ButtonLink href={ employees.actions.edit } className='bg-green-500 hover:text-white hover:bg-green-400'>
+                        Edit
+                    </ButtonLink>
+                </td>
+            </tr>
+        ) : 
+        <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+            <th colSpan={8} scope="row" className="px-6 py-4 font-medium text-center text-gray-900 whitespace-nowrap dark:text-white">No employee data</th>
         </tr>
-    )
 
     return (
         <AuthenticatedLayout

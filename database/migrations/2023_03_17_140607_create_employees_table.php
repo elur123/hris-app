@@ -18,14 +18,18 @@ return new class extends Migration
             $table->bigInteger('user_id');
             $table->string('employee_key');
             $table->string('first_name');
-            $table->string('middle_name');
+            $table->string('middle_name')->nullable();
             $table->string('last_name');
-            $table->string('suffix');
-            $table->date('birth_date');
-            $table->string('address');
-            $table->string('contact_no');
+            $table->string('suffix')->nullable();
+            $table->date('date_of_birth')->nullable();
+            $table->string('place_of_birth')->nullable();
+            $table->string('current_address')->nullable();
+            $table->string('contact_no')->nullable();
             $table->string('rate_type');
             $table->double('rate', 10, 2);
+            $table->integer('position_id');
+            $table->integer('branch_id');
+            $table->integer('department_id');
             $table->timestamps();
         });
     }
