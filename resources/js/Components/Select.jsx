@@ -5,7 +5,7 @@ import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 export default forwardRef(function Select({onSelect, ...props}, ref) {
     const select = ref ? ref : useRef();
     
-    const [selected, setSelected] = useState(props.data[0])
+    const [selected, setSelected] = useState()
     const [query, setQuery] = useState('')
   
     const filteredPeople =
@@ -17,10 +17,16 @@ export default forwardRef(function Select({onSelect, ...props}, ref) {
             .replace(/\s+/g, '')
             .includes(query.toLowerCase().replace(/\s+/g, ''))        
         )
+
+    const handleChange = (event) => {
+      setSelected(event);
+
+      onSelect(event);
+    }
   
     return (
         <div className="w-100">
-        <Combobox value={selected} onChange={setSelected}>
+        <Combobox value={selected} onChange={handleChange}>
           <div className="relative mt-1">
             <div className="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
               <Combobox.Input

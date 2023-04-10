@@ -20,7 +20,24 @@ class Employee extends Model
         'address',
         'contact_no',
         'rate_type', 
-        'rate'
+        'rate',
+        'position_id',
+        'branch_id',
+        'department_id',
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class);
+    }
+
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
+    }
 }

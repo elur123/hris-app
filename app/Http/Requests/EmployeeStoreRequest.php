@@ -19,9 +19,9 @@ class EmployeeStoreRequest extends FormRequest
         return [
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
-            'rate_type' => ['required', 'string', 'max:255'],
+            'rate_type' => ['required'],
             'rate' => ['required', 'numeric'],
-            'position' => ['required'],
+            // 'position' => ['required'],
             'branch' => ['required'],
             'department' => ['required'],
         ];

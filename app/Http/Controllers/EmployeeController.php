@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\EmployeeStoreRequest;
 use App\Http\Requests\EmployeeUpdateRequest;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
@@ -18,9 +19,29 @@ class EmployeeController extends Controller
 {
     
     public function index() : Response
-    {
+    {   
+        $employees = Employee::query()
+        ->with('user', 'branch', 'department')
+        ->get()
+        ->map(function ($employee) {
+
+            return [
+                'id' => $employee->id,
+                'fullname' => $employee->user->name,
+                'email' => $employee->user->email,
+                'contact_no' => $employee->contact_no,
+                'branch' => $employee->branch->name,
+                'department' => $employee->department->name,
+                'created_at' => date("F j, Y, g:i a", strtotime($employee->created_at)),
+                'updated_at' => date("F j, Y, g:i a", strtotime($employee->updated_at)),
+                'actions' => [
+                    'edit' => route('employees.edit', $employee)
+                ]
+            ];
+        });
+
         return Inertia::render('Admin/Employee/Index', [
-            'employees' => Employee::all()
+            'employees' => $employees
         ]);
     }
 
@@ -30,10 +51,19 @@ class EmployeeController extends Controller
         ->with('departments')
         ->get()
         ->map(function($branch) {
+            
+            $departments = $branch->departments
+            ->map(function($dep) {
+                return [
+                    'id' => $dep->id,
+                    'label' => $dep->name
+                ];
+            });
+
             return [
                 'id' => $branch->id,
                 'label' => $branch->name,
-                'departments' => $branch->departments
+                'departments' => $departments
             ];
         });
 
@@ -55,6 +85,8 @@ class EmployeeController extends Controller
 
     public function store(EmployeeStoreRequest $request) : RedirectResponse
     {
+
+        // dd($request->all());
         $employee_key = 'EMP-'.Str::random(8);
 
         $user = User::create([
@@ -64,6 +96,8 @@ class EmployeeController extends Controller
         ]);
 
         $employee = Employee::create([
+            'user_id' => $user->id,
+            'employee_key' => $employee_key,
             'first_name' => $request->first_name,
             'middle_name' => $request->middle_name,
             'last_name' => $request->last_name,
@@ -74,11 +108,16 @@ class EmployeeController extends Controller
             'contact_no' => $request->contact_no,
             'rate' => $request->rate,
             'rate_type' => $request->rate_type,
-            'postion_id' => 1,
+            'position_id' => 1,
             'branch_id' => $request->branch,
-            'department_id' => $request->department_id
+            'department_id' => $request->department
         ]);
 
         return Redirect::route('employees.index');
+    }
+
+    public function edit(Employee $employee): Response
+    {
+
     }
 }

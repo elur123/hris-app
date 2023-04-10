@@ -13,19 +13,19 @@ export default function Employee(props) {
         props.employees.map((employee) => 
             <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700" key={employee.id}>
                 <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    { employee.name }
+                    { employee.fullname }
                 </th>
                 <td className="px-6 py-4">
-                    { employee.created_at }
+                    { employee.email }
                 </td>
                 <td className="px-6 py-4">
-                    { employee.created_at }
+                    { employee.contact_no }
                 </td>
                 <td className="px-6 py-4">
-                    { employee.created_at }
+                    { employee.branch }
                 </td>
                 <td className="px-6 py-4">
-                    { employee.created_at }
+                    { employee.department }
                 </td>
                 <td className="px-6 py-4">
                     { employee.created_at }
@@ -34,7 +34,7 @@ export default function Employee(props) {
                     { employee.updated_at }
                 </td>
                 <td className="px-6 py-4">
-                    <ButtonLink href={ employees.actions.edit } className='bg-green-500 hover:text-white hover:bg-green-400'>
+                    <ButtonLink href={ employee.actions.edit } className='bg-green-500 hover:text-white hover:bg-green-400'>
                         Edit
                     </ButtonLink>
                 </td>

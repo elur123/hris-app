@@ -32,6 +32,7 @@ export default function Create(props) {
     const rate_type = useRef();
     const branch = useRef();
     const department = useRef();
+    let [departments, updateDepartments] = useState([{id: 0, label: 'Select Branch'}])
 
     const family_request = {
         fullname: useRef(),
@@ -170,6 +171,13 @@ export default function Create(props) {
     </tr>
 
     // Page functions
+    const changeBranch = (val) => {
+        setData('branch', val.id)
+
+        const deps = props.branches.find(e => e.id === val.id)
+
+        updateDepartments(deps.departments)
+    }
     const createEmployee = (e) => {
         e.preventDefault();
 
@@ -441,6 +449,7 @@ export default function Create(props) {
                                         ref={school_attainment.type}
                                         className="mt-1 block w-full"
                                         data={props.school_types}
+                                        onSelect={() => {}}
                                     />
                                 </div>
                                 <div>
@@ -511,6 +520,7 @@ export default function Create(props) {
                                         ref={rate_type}
                                         className="mt-1 block w-full"
                                         data={props.rate_types}
+                                        onSelect={(val) => setData('rate_type', val.id)}
                                     />
 
                                     <InputError message={errors.rate_type} className="mt-2" />
@@ -522,11 +532,12 @@ export default function Create(props) {
                                     <Select 
                                         id="branch"
                                         ref={branch}
-                                        value={data.branch}
-                                        onSelect={(e) => console.log('test')}
                                         className="mt-1 block w-full"
                                         data={props.branches}
+                                        onSelect={(val) => changeBranch(val)}
                                     />
+
+                                    <InputError message={errors.branch} className="mt-2" />
                                 </div>
 
                                 <div>
@@ -535,11 +546,12 @@ export default function Create(props) {
                                     <Select 
                                         id="department"
                                         ref={department}
-                                        value={data.department}
-                                        onSelect={(e) => console.log('test')}
                                         className="mt-1 block w-full"
-                                        data={props.branches}
+                                        data={departments}
+                                        onSelect={(val) => setData('department', val.id)}
                                     />
+
+                                    <InputError message={errors.department} className="mt-2" />
                                 </div>
 
                             </div>
