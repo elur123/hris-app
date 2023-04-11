@@ -2,10 +2,10 @@ import { Fragment, forwardRef, useState, useRef } from 'react'
 import { Combobox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
   
-export default forwardRef(function Select({onSelect, ...props}, ref) {
+export default forwardRef(function Select({val, onSelect, ...props}, ref) {
     const select = ref ? ref : useRef();
     
-    const [selected, setSelected] = useState()
+    const [selected, setSelected] = useState(val ?? props.data[0])
     const [query, setQuery] = useState('')
   
     const filteredPeople =
@@ -30,9 +30,8 @@ export default forwardRef(function Select({onSelect, ...props}, ref) {
           <div className="relative mt-1">
             <div className="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
               <Combobox.Input
-                ref={select}
                 className="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                displayValue={(opt) => opt.label}
+                displayValue={(selected) => selected.label}
                 onChange={(event) => setQuery(event.target.value)}
               />
               <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">

@@ -16,10 +16,11 @@ class Employee extends Model
         'middle_name', 
         'last_name',
         'suffix',
-        'birth_date', 
-        'address',
+        'date_of_birth',
+        'place_of_birth', 
+        'current_address',
         'contact_no',
-        'rate_type', 
+        'rate_type_id', 
         'rate',
         'position_id',
         'branch_id',
@@ -39,5 +40,15 @@ class Employee extends Model
     public function department()
     {
         return $this->belongsTo(Department::class);
+    }
+
+    public function position()
+    {
+        return $this->belongsTo(Position::class, 'position_id');
+    }
+
+    public function rateType()
+    {
+        return $this->belongsTo(RateType::class, 'rate_type_id');
     }
 }

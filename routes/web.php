@@ -8,6 +8,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\PositionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,6 +55,15 @@ Route::prefix('employees')->name('employees.')->group(function () {
     Route::get('/create', [EmployeeController::class, 'create'])->name('create');
     Route::post('/store', [EmployeeController::class, 'store'])->name('store');
     Route::get('/{employee}', [EmployeeController::class, 'edit'])->name('edit');
+    Route::put('/{employee}', [EmployeeController::class, 'update'])->name('update');
+})->middleware(['auth', 'verified']);
+
+Route::prefix('positions')->name('positions.')->group(function () {
+    Route::get('/', [PositionController::class, 'index'])->name('index');
+    Route::get('/create', [PositionController::class, 'create'])->name('create');
+    Route::post('/store', [PositionController::class, 'store'])->name('store');
+    Route::get('/{position}', [PositionController::class, 'edit'])->name('edit');
+    Route::put('/{position}', [PositionController::class, 'update'])->name('update');
 })->middleware(['auth', 'verified']);
 
 Route::middleware('auth')->group(function () {

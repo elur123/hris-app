@@ -15,7 +15,7 @@ import PrimaryButton from '@/Components/PrimaryButton';
 
 import { Head } from '@inertiajs/react';
 import { useForm } from '@inertiajs/react';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function Create(props) {
     const profile_picture = useRef();
@@ -29,10 +29,7 @@ export default function Create(props) {
     const email = useRef();
     const address = useRef();
     const rate = useRef();
-    const rate_type = useRef();
-    const branch = useRef();
-    const department = useRef();
-    let [departments, updateDepartments] = useState([{id: 0, label: 'Select Branch'}])
+    let [departments, updateDepartments] = useState([{id: 0, label: 'Select branch first'}])
 
     const family_request = {
         fullname: useRef(),
@@ -64,6 +61,7 @@ export default function Create(props) {
         rate_type: '',
         branch: '',
         department: '',
+        position: '',
     });
 
     // Family members functions
@@ -495,6 +493,21 @@ export default function Create(props) {
                         <hr />
                         <div id="employement-information">
                             <h5 className="my-4 font-bold text-gray-900">Employement Information</h5>
+                            <div className="grid grid-cols-2 gap-4 my-4">
+                                <div>
+                                    <InputLabel htmlFor="position" value="Position" />
+
+                                    <Select 
+                                        id="position"
+                                        val={undefined}
+                                        className="mt-1 block w-full"
+                                        data={props.positions}
+                                        onSelect={(val) => setData('position', val.id)}
+                                    />
+
+                                    <InputError message={errors.position} className="mt-2" />
+                                </div>
+                            </div>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-4">
                                 <div>
                                     <InputLabel htmlFor="rate" value="Rate" />
@@ -517,7 +530,6 @@ export default function Create(props) {
 
                                     <Select 
                                         id="rate_type"
-                                        ref={rate_type}
                                         className="mt-1 block w-full"
                                         data={props.rate_types}
                                         onSelect={(val) => setData('rate_type', val.id)}
@@ -531,7 +543,6 @@ export default function Create(props) {
 
                                     <Select 
                                         id="branch"
-                                        ref={branch}
                                         className="mt-1 block w-full"
                                         data={props.branches}
                                         onSelect={(val) => changeBranch(val)}
@@ -545,7 +556,6 @@ export default function Create(props) {
 
                                     <Select 
                                         id="department"
-                                        ref={department}
                                         className="mt-1 block w-full"
                                         data={departments}
                                         onSelect={(val) => setData('department', val.id)}

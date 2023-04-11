@@ -15,6 +15,8 @@ use Inertia\Response;
 use App\Models\Employee;
 use App\Models\User;
 use App\Models\Branch;
+use App\Models\Position;
+use App\Models\RateType;
 class EmployeeController extends Controller
 {
     
@@ -32,6 +34,7 @@ class EmployeeController extends Controller
                 'contact_no' => $employee->contact_no,
                 'branch' => $employee->branch->name,
                 'department' => $employee->department->name,
+                'position' => $employee->position->label,
                 'created_at' => date("F j, Y, g:i a", strtotime($employee->created_at)),
                 'updated_at' => date("F j, Y, g:i a", strtotime($employee->updated_at)),
                 'actions' => [
@@ -47,7 +50,11 @@ class EmployeeController extends Controller
 
     public function create() : Response
     {
-        $branches = Branch::query()
+        $rate_types = collect([['id' => null, 'label' => 'Select rate type']]);
+        $rate_types = $rate_types->merge(RateType::query()->get());
+
+        $branches = collect([['id' => null, 'label' => 'Select branch', 'departments' => []]]);
+        $branches = $branches->merge(Branch::query()
         ->with('departments')
         ->get()
         ->map(function($branch) {
@@ -65,7 +72,11 @@ class EmployeeController extends Controller
                 'label' => $branch->name,
                 'departments' => $departments
             ];
-        });
+        }));
+
+        $positions = collect([['id' => null, 'label' => 'Select position']]);
+        $positions = $positions->merge(Position::all());
+
 
         return Inertia::render('Admin/Employee/Create', [
             'school_types' => [
@@ -74,12 +85,9 @@ class EmployeeController extends Controller
                 ['id' => 3, 'label' => 'College'],
                 ['id' => 4, 'label' => 'Vocational']
             ],
-            'rate_types' => [
-                ['id' => 1, 'label' => 'Daily'],
-                ['id' => 2, 'label' => 'Weekly'],
-                ['id' => 3, 'label' => 'Monthly'],
-            ],
-            'branches' => $branches
+            'rate_types' => $rate_types,
+            'branches' => $branches,
+            'positions' => $positions
         ]);
     }
 
@@ -102,13 +110,13 @@ class EmployeeController extends Controller
             'middle_name' => $request->middle_name,
             'last_name' => $request->last_name,
             'suffix' => $request->suffix,
-            'date_of_birth' => $request->date_of_birth,
-            'palce_of_birth' => $request->place_of_birth,
-            'current_address' => $request->current_address,
+            'date_of_birth' => $request->birth_date,
+            'place_of_birth' => $request->place_of_birth,
+            'current_address' => $request->address,
             'contact_no' => $request->contact_no,
             'rate' => $request->rate,
-            'rate_type' => $request->rate_type,
-            'position_id' => 1,
+            'rate_type_id' => $request->rate_type,
+            'position_id' => $request->position,
             'branch_id' => $request->branch,
             'department_id' => $request->department
         ]);
@@ -118,6 +126,73 @@ class EmployeeController extends Controller
 
     public function edit(Employee $employee): Response
     {
+        // Load relationship tables
+        $employee->load('user', 'position', 'branch', 'department', 'rateType');
 
+        $rate_types = collect([['id' => null, 'label' => 'Select rate type']]);
+        $rate_types = $rate_types->merge(RateType::query()->get());
+
+        $branches = collect([['id' => null, 'label' => 'Select branch', 'departments' => []]]);
+        $branches = $branches->merge(Branch::query()
+        ->with('departments')
+        ->get()
+        ->map(function($branch) {
+            
+            $departments = $branch->departments
+            ->map(function($dep) {
+                return [
+                    'id' => $dep->id,
+                    'label' => $dep->name
+                ];
+            });
+
+            return [
+                'id' => $branch->id,
+                'label' => $branch->name,
+                'departments' => $departments
+            ];
+        }));
+
+        $positions = collect([['id' => null, 'label' => 'Select position']]);
+        $positions = $positions->merge(Position::all());
+
+        return Inertia::render('Admin/Employee/Edit', [
+            'employee' => $employee,
+            'school_types' => [
+                ['id' => 1, 'label' => 'Elementary'],
+                ['id' => 2, 'label' => 'High Scool'],
+                ['id' => 3, 'label' => 'College'],
+                ['id' => 4, 'label' => 'Vocational']
+            ],
+            'rate_types' => $rate_types,
+            'branches' => $branches,
+            'positions' => $positions
+        ]);
+    }   
+
+    public function update(EmployeeUpdateRequest $request, Employee $employee): RedirectResponse
+    {
+        $employee->update([
+            'first_name' => $request->first_name,
+            'middle_name' => $request->middle_name,
+            'last_name' => $request->last_name,
+            'suffix' => $request->suffix,
+            'date_of_birth' => $request->birth_date,
+            'place_of_birth' => $request->place_of_birth,
+            'current_address' => $request->address,
+            'contact_no' => $request->contact_no,
+            'rate' => $request->rate,
+            'rate_type_id' => $request->rate_type,
+            'position_id' => $request->position,
+            'branch_id' => $request->branch,
+            'department_id' => $request->department
+        ]);
+
+        $employee->user()->update([
+            'name' => $request->first_name .' '. $request->last_name,
+            'email' => $request->email
+        ]);
+
+        return Redirect::route('employees.index');
     }
 }

@@ -12,23 +12,18 @@ import { Head } from '@inertiajs/react';
 import { useForm } from '@inertiajs/react';
 
 export default function Edit(props) {
-    const department = props.department
 
     const { data, setData, errors, put, reset, processing, recentlySuccessful } = useForm({
-        name: department.name,
+        label: props.position.label,
     });
 
-    const updateDepartment = (e) => {
+    const updatePosition = (e) => {
         e.preventDefault();
 
-        put(route('departments.update', props.department), {
+        put(route('positions.update', props.position), {
             preserveScroll: true,
             onSuccess: () => reset(),
-            onError: () => {
-                if (errors.name) {
-                    reset('password', 'name');
-                }
-            },
+            onError: () => {},
         });
     };
 
@@ -36,29 +31,29 @@ export default function Edit(props) {
         <AuthenticatedLayout
             auth={props.auth}
             errors={props.errors}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Department - Edit</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Position - Update</h2>}
         >
-            <Head title="Department - Create" />
+            <Head title="Position - Update" />
 
             <Card>
-                <form onSubmit={updateDepartment}>
+                <form onSubmit={updatePosition}>
                     <CardHeader className=''>
-                        <h3 className="p-6 text-gray-900">Update department</h3>
+                        <h3 className="p-6 text-gray-900">Update position</h3>
                     </CardHeader>
                     <CardBody>
                         <div>
-                            <InputLabel htmlFor="name" value="Department name" />
+                            <InputLabel htmlFor="name" value="Position name" />
 
                             <TextInput
-                                id="name"
-                                value={data.name}
-                                onChange={(e) => setData('name', e.target.value)}
+                                id="position"
+                                value={data.label}
+                                onChange={(e) => setData('label', e.target.value)}
                                 type="text"
                                 className="mt-1 block w-full"
-                                autoComplete="name"
+                                autoComplete="label"
                             />
 
-                            <InputError message={errors.name} className="mt-2" />
+                            <InputError message={errors.label} className="mt-2" />
                         </div>
                     </CardBody>
                     <CardFooter>

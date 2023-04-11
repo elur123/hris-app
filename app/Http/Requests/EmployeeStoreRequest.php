@@ -6,6 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
 use App\Models\Employee;
+use App\Models\User;
 class EmployeeStoreRequest extends FormRequest
 {
 
@@ -19,9 +20,10 @@ class EmployeeStoreRequest extends FormRequest
         return [
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'max:255', Rule::unique(User::class)],
             'rate_type' => ['required'],
             'rate' => ['required', 'numeric'],
-            // 'position' => ['required'],
+            'position' => ['required'],
             'branch' => ['required'],
             'department' => ['required'],
         ];

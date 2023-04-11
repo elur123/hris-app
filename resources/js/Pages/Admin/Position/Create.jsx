@@ -10,23 +10,25 @@ import PrimaryButton from '@/Components/PrimaryButton';
 
 import { Head } from '@inertiajs/react';
 import { useForm } from '@inertiajs/react';
+import { useRef } from 'react';
 
-export default function Edit(props) {
-    const department = props.department
+export default function Create(props) {
+    const label = useRef();
 
-    const { data, setData, errors, put, reset, processing, recentlySuccessful } = useForm({
-        name: department.name,
+    const { data, setData, errors, post, reset, processing, recentlySuccessful } = useForm({
+        label: '',
     });
 
-    const updateDepartment = (e) => {
+    const createPosition = (e) => {
         e.preventDefault();
 
-        put(route('departments.update', props.department), {
+        post(route('positions.store'), {
             preserveScroll: true,
             onSuccess: () => reset(),
             onError: () => {
-                if (errors.name) {
-                    reset('password', 'name');
+                if (errors.label) {
+                    reset('label');
+                    label.current.focus();
                 }
             },
         });
@@ -36,33 +38,34 @@ export default function Edit(props) {
         <AuthenticatedLayout
             auth={props.auth}
             errors={props.errors}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Department - Edit</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Position - Create</h2>}
         >
-            <Head title="Department - Create" />
+            <Head title="Position - Create" />
 
             <Card>
-                <form onSubmit={updateDepartment}>
+                <form onSubmit={createPosition}>
                     <CardHeader className=''>
-                        <h3 className="p-6 text-gray-900">Update department</h3>
+                        <h3 className="p-6 text-gray-900">Create new position</h3>
                     </CardHeader>
                     <CardBody>
                         <div>
-                            <InputLabel htmlFor="name" value="Department name" />
+                            <InputLabel htmlFor="name" value="Position name" />
 
                             <TextInput
-                                id="name"
-                                value={data.name}
-                                onChange={(e) => setData('name', e.target.value)}
+                                id="label"
+                                ref={label}
+                                value={data.label}
+                                onChange={(e) => setData('label', e.target.value)}
                                 type="text"
                                 className="mt-1 block w-full"
-                                autoComplete="name"
+                                autoComplete="label"
                             />
 
-                            <InputError message={errors.name} className="mt-2" />
+                            <InputError message={errors.label} className="mt-2" />
                         </div>
                     </CardBody>
                     <CardFooter>
-                        <PrimaryButton disabled={processing}>Update</PrimaryButton>
+                        <PrimaryButton disabled={processing}>Create</PrimaryButton>
                     </CardFooter>
                 </form>
             </Card>
