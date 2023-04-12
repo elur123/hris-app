@@ -51,4 +51,19 @@ class Employee extends Model
     {
         return $this->belongsTo(RateType::class, 'rate_type_id');
     }
+
+    public function familyMembers()
+    {
+        return $this->hasMany(FamilyMember::class, 'employee_id');
+    }
+
+    public function educationalAttainments()
+    {
+        return $this->hasMany(EducationalAttainment::class, 'employee_id');
+    }
+
+    public function experiences()
+    {
+        return $this->hasMany(EmployeeExperience::class, 'employee_id');
+    }
 }

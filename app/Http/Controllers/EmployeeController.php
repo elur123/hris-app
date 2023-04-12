@@ -8,6 +8,7 @@ use App\Http\Requests\EmployeeStoreRequest;
 use App\Http\Requests\EmployeeUpdateRequest;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -29,6 +30,7 @@ class EmployeeController extends Controller
 
             return [
                 'id' => $employee->id,
+                'profile_picture' => str_replace('public', 'storage', $employee->user->profile_picture),
                 'fullname' => $employee->user->name,
                 'email' => $employee->user->email,
                 'contact_no' => $employee->contact_no,
@@ -80,10 +82,10 @@ class EmployeeController extends Controller
 
         return Inertia::render('Admin/Employee/Create', [
             'school_types' => [
-                ['id' => 1, 'label' => 'Elementary'],
-                ['id' => 2, 'label' => 'High Scool'],
-                ['id' => 3, 'label' => 'College'],
-                ['id' => 4, 'label' => 'Vocational']
+                ['id' => 'elementary', 'label' => 'Elementary'],
+                ['id' => 'high school', 'label' => 'High School'],
+                ['id' => 'college', 'label' => 'College'],
+                ['id' => 'vocational', 'label' => 'Vocational']
             ],
             'rate_types' => $rate_types,
             'branches' => $branches,
@@ -94,13 +96,23 @@ class EmployeeController extends Controller
     public function store(EmployeeStoreRequest $request) : RedirectResponse
     {
 
-        // dd($request->all());
-        $employee_key = 'EMP-'.Str::random(8);
+        $employee_key = 'EMP-'.Str::random(4);
+        $profile_picture_path = '';
+        if ($request->hasFile('profile_picture')) {
+            
+            $file = $request->file('profile_picture');
+            $fileName = $employee_key .'.'. $file->getClientOriginalExtension();
+            
+            // Save profile picture
+            $profile_picture_path = $file->storeAs('public/files/profilePictures', $fileName);
+        }
 
         $user = User::create([
+            'profile_picture' => $profile_picture_path,
             'name' => $request->first_name .' '. $request->last_name,
             'email' => $request->email,
-            'password' => Hash::make($employee_key)
+            'password' => Hash::make($employee_key),
+            'role_id' => 2
         ]);
 
         $employee = Employee::create([
@@ -121,13 +133,17 @@ class EmployeeController extends Controller
             'department_id' => $request->department
         ]);
 
+        $this->storeFamilyMembers($employee, $request->family_members);
+        $this->storeEducationalAttainments($employee, $request->school_attainments);
+        $this->storeExperiences($employee, $request->experiences);
+
         return Redirect::route('employees.index');
     }
 
     public function edit(Employee $employee): Response
     {
         // Load relationship tables
-        $employee->load('user', 'position', 'branch', 'department', 'rateType');
+        $employee->load('user', 'position', 'branch', 'department', 'rateType', 'familyMembers', 'educationalAttainments', 'experiences');
 
         $rate_types = collect([['id' => null, 'label' => 'Select rate type']]);
         $rate_types = $rate_types->merge(RateType::query()->get());
@@ -172,6 +188,16 @@ class EmployeeController extends Controller
 
     public function update(EmployeeUpdateRequest $request, Employee $employee): RedirectResponse
     {
+        $profile_picture_path = $employee->user->profile_picture;
+        if ($request->hasFile('profile_picture')) {
+            
+            $file = $request->file('profile_picture');
+            $fileName = $employee->employee_key .'.'. $file->getClientOriginalExtension();
+            
+            // Save profile picture
+            $profile_picture_path = $file->storeAs('public/files/profilePictures', $fileName);
+        }
+
         $employee->update([
             'first_name' => $request->first_name,
             'middle_name' => $request->middle_name,
@@ -189,10 +215,46 @@ class EmployeeController extends Controller
         ]);
 
         $employee->user()->update([
+            'profile_picture' => $profile_picture_path,
             'name' => $request->first_name .' '. $request->last_name,
             'email' => $request->email
         ]);
 
+        
+
         return Redirect::route('employees.index');
+    }
+
+    private function storeFamilyMembers(Employee $employee, $members)
+    {  
+        foreach ($members as $key => $value) {
+            $employee->familyMembers()->create([
+                'fullname' => $value['fullname'],
+                'relationship' => $value['relationship']
+            ]);
+        }
+    }
+
+    private function storeEducationalAttainments(Employee $employee, $attainments)
+    {  
+        foreach ($attainments as $key => $value) {
+            $employee->educationalAttainments()->create([
+                'school_name' => $value['school_name'],
+                'education_level' => $value['type'],
+                'year_graduated' => $value['year']
+            ]);
+        }
+    }
+
+    private function storeExperiences(Employee $employee, $experiences)
+    {  
+        foreach ($experiences as $key => $value) {
+            $employee->experiences()->create([
+                'company_name' => $value['company_name'],
+                'position' => $value['position'],
+                'start_at' => $value['start_at'],
+                'end_at' => $value['end_at']
+            ]);
+        }
     }
 }

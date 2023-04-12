@@ -38,8 +38,15 @@ export default function Create(props) {
 
     const school_attainment = {
         school_name: useRef(),
-        type: useRef(),
+        type: 'Elementary',
         year: useRef(),
+    }
+
+    const employee_experience = {
+        company_name: useRef(),
+        position: useRef(),
+        start_at: useRef(),
+        end_at: useRef()
     }
 
 
@@ -55,13 +62,14 @@ export default function Create(props) {
         contact_no: '',
         emai: '',
         address: '',
-        family_members: [],
-        school_attainments: [],
         rate: '',
         rate_type: '',
         branch: '',
         department: '',
         position: '',
+        family_members: [],
+        school_attainments: [],
+        experiences: [],
     });
 
     // Family members functions
@@ -116,21 +124,20 @@ export default function Create(props) {
 
     // School Attainment functions
     const addSchoolAttainment = () => {
-        if (school_attainment.school_name.current.value == '' || school_attainment.type.current.value == '' || school_attainment.year.value) {
+        if (school_attainment.school_name.current.value == '' || school_attainment.type == '' || school_attainment.year.current.value == '') {
             alert('Check, field required')
             return;
         }
 
         const newSchoolData = {
             school_name: school_attainment.school_name.current.value,
-            type: school_attainment.type.current.value,
+            type: school_attainment.type,
             year: school_attainment.year.current.value
         }
 
         setData('school_attainments', [...data.school_attainments, newSchoolData])
 
         school_attainment.school_name.current.value = '';
-        school_attainment.type.current.value = 'Elementary';
         school_attainment.year.current.value = '';
     }
 
@@ -165,6 +172,65 @@ export default function Create(props) {
     <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
         <th scope="row" colSpan={4} className="px-6 py-4 font-medium text-center text-gray-900 whitespace-nowrap dark:text-white">
             No school attainment
+        </th>
+    </tr>
+
+    // Experience functions
+    const addExperience = () => {
+        if (employee_experience.company_name.current.value == '' || employee_experience.position.current.value == '' 
+        || employee_experience.start_at.current.value == '' || employee_experience.end_at.current.value == '') {
+            alert('Check, field required')
+
+            console.log(employee_experience);
+            return;
+        }
+
+        const newExperienceData = {
+            company_name: employee_experience.company_name.current.value,
+            position: employee_experience.position.current.value,
+            start_at: employee_experience.start_at.current.value,
+            end_at: employee_experience.end_at.current.value
+        }
+
+        setData('experiences', [...data.experiences, newExperienceData])
+
+        employee_experience.company_name.current.value = '';
+        employee_experience.position.current.value = '';
+        employee_experience.start_at.current.value = '';
+        employee_experience.end_at.current.value = '';
+    }
+
+    const removeEmployeeExperience = (index) => {
+        setData(prevData => {
+            const newExperience = [...prevData.experiences];
+            newExperience.splice(index, 1);
+            return {
+                ...prevData,
+                experiences: newExperience,
+            };
+        });
+    }
+
+    const experienceData = data.experiences.length ? 
+    data.experiences.map((exp, index) => 
+        <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700" key={index}>
+            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                { exp.company_name }
+            </th>
+            <td className="px-6 py-4">
+                { exp.position }
+            </td>
+            <td className="px-6 py-4">
+                { exp.start_at } - { exp.end_at }
+            </td>
+            <td className="px-6 py-4">
+                <PrimaryButton type="button" onClick={() => removeEmployeeExperience(index)}>Remove</PrimaryButton>
+            </td>
+        </tr>
+    ) : 
+    <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+        <th scope="row" colSpan={4} className="px-6 py-4 font-medium text-center text-gray-900 whitespace-nowrap dark:text-white">
+            No experience
         </th>
     </tr>
 
@@ -205,7 +271,7 @@ export default function Create(props) {
                         <h3 className="p-6 font-bold text-gray-900">Create new employee</h3>
                     </CardHeader>
                     <CardBody>
-                        <div id="personal-information">
+                        <div id="personal-information" className="mb-4">
                             <h5 className="mb-4 font-bold text-gray-900">Personal Information</h5>
                             <div className="grid grid-cols-2 mb-4">
                                 <div>
@@ -214,8 +280,7 @@ export default function Create(props) {
                                     <TextInput
                                         id="profile_picture"
                                         ref={profile_picture}
-                                        value={data.profile_picture}
-                                        onChange={(e) => setData('profile_picture', e.target.value)}
+                                        onChange={(e) => setData('profile_picture', e.target.files[0])}
                                         type="file"
                                         className="mt-1 block w-full"
                                         autoComplete="profile_picture"
@@ -367,131 +432,8 @@ export default function Create(props) {
                                 <InputError message={errors.address} className="mt-2" />
                             </div>
                         </div>
-                        <hr />
-                        <div id="family-member">
-                            <h5 className="my-4 font-bold text-gray-900">Family Member</h5>
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-4">
-                                <div>
-                                    <InputLabel htmlFor="fullname" value="Fullname" />
-
-                                    <TextInput
-                                        id="fullname"
-                                        ref={family_request.fullname}
-                                        type="text"
-                                        className="mt-1 block w-full"
-                                        autoComplete="fullname"
-                                    />
-
-                                </div>
-
-                                <div>
-                                    <InputLabel htmlFor="address" value="Relationship" />
-
-                                    <TextInput
-                                        id="relationship"
-                                        ref={family_request.relationship}
-                                        type="text"
-                                        className="mt-1 block w-full"
-                                        autoComplete="relationship"
-                                    />
-                                </div>
-
-                                <div>
-                                    <InputLabel htmlFor="address" value="Action" />
-
-                                    <PrimaryButton type="button" onClick={addFamilyMember} className="w-full py-2 px-3 justify-center mt-1">Add</PrimaryButton>
-                                </div>
-
-                            </div>
-                            <Table className="mb-2">
-                                <TableHead>
-                                    <tr>
-                                        <th scope="col" className="px-6 py-3">
-                                            Fullname
-                                        </th>
-                                        <th scope="col" className="px-6 py-3">
-                                            Relationship
-                                        </th>
-                                        <th scope="col" className="px-6 py-3">
-                                            Action
-                                        </th>
-                                    </tr>
-                                </TableHead>
-                                <TableBody>
-                                    { familyData }
-                                </TableBody>
-                            </Table>
-                        </div>
-                        <hr />
-                        <div id="educational-atainment">
-                            <h5 className="my-4 font-bold text-gray-900">Educational Attainment</h5>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-4">
-                                <div>
-                                    <InputLabel htmlFor="school_name" value="School name" />
-
-                                    <TextInput
-                                        id="school_name"
-                                        ref={school_attainment.school_name}
-                                        type="text"
-                                        className="mt-1 block w-full"
-                                        autoComplete="school_name"
-                                    />
-
-                                </div>
-
-                                <div>
-                                    <InputLabel htmlFor="type" value="School type" />
-
-                                    <Select 
-                                        id="school_type"
-                                        ref={school_attainment.type}
-                                        className="mt-1 block w-full"
-                                        data={props.school_types}
-                                        onSelect={() => {}}
-                                    />
-                                </div>
-                                <div>
-                                    <InputLabel htmlFor="year_graduated" value="Year graduated" />
-
-                                    <TextInput
-                                        id="year_graduated"
-                                        ref={school_attainment.year}
-                                        type="text"
-                                        className="mt-1 block w-full"
-                                        autoComplete="year_graduated"
-                                    />
-
-                                </div>
-                                <div>
-                                    <InputLabel htmlFor="address" value="Action" />
-
-                                    <PrimaryButton type="button" onClick={addSchoolAttainment} className="w-full py-2 px-3 justify-center mt-1">Add</PrimaryButton>
-                                </div>
-                            </div>
-                            <Table className="mb-2">
-                                <TableHead>
-                                    <tr>
-                                        <th scope="col" className="px-6 py-3">
-                                            School name
-                                        </th>
-                                        <th scope="col" className="px-6 py-3">
-                                            Type
-                                        </th>
-                                        <th scope="col" className="px-6 py-3">
-                                            Year
-                                        </th>
-                                        <th scope="col" className="px-6 py-3">
-                                            Action
-                                        </th>
-                                    </tr>
-                                </TableHead>
-                                <TableBody>
-                                    { schoolData }
-                                </TableBody>
-                            </Table>
-                        </div>
-                        <hr />
-                        <div id="employement-information">
+                        <hr className="drop-shadow-md"/>
+                        <div id="employement-information" className="mb-4">
                             <h5 className="my-4 font-bold text-gray-900">Employement Information</h5>
                             <div className="grid grid-cols-2 gap-4 my-4">
                                 <div>
@@ -565,6 +507,212 @@ export default function Create(props) {
                                 </div>
 
                             </div>
+                        </div>
+                        <hr className="drop-shadow-md" />
+                        <div id="family-member" className="mb-4">
+                            <h5 className="my-4 font-bold text-gray-900">Family Member</h5>
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-4">
+                                <div>
+                                    <InputLabel htmlFor="fullname" value="Fullname" />
+
+                                    <TextInput
+                                        id="fullname"
+                                        ref={family_request.fullname}
+                                        type="text"
+                                        className="mt-1 block w-full"
+                                        autoComplete="fullname"
+                                    />
+
+                                </div>
+
+                                <div>
+                                    <InputLabel htmlFor="address" value="Relationship" />
+
+                                    <TextInput
+                                        id="relationship"
+                                        ref={family_request.relationship}
+                                        type="text"
+                                        className="mt-1 block w-full"
+                                        autoComplete="relationship"
+                                    />
+                                </div>
+
+                                <div>
+                                    <InputLabel htmlFor="address" value="Action" />
+
+                                    <PrimaryButton type="button" onClick={addFamilyMember} className="w-full py-2 px-3 justify-center mt-1">Add</PrimaryButton>
+                                </div>
+
+                            </div>
+                            <Table className="mb-2">
+                                <TableHead>
+                                    <tr>
+                                        <th scope="col" className="px-6 py-3">
+                                            Fullname
+                                        </th>
+                                        <th scope="col" className="px-6 py-3">
+                                            Relationship
+                                        </th>
+                                        <th scope="col" className="px-6 py-3">
+                                            Action
+                                        </th>
+                                    </tr>
+                                </TableHead>
+                                <TableBody>
+                                    { familyData }
+                                </TableBody>
+                            </Table>
+                        </div>
+                        <hr className="drop-shadow-md" />
+                        <div id="educational-atainment" className="mb-4">
+                            <h5 className="my-4 font-bold text-gray-900">Educational Attainment</h5>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-4">
+                                <div>
+                                    <InputLabel htmlFor="school_name" value="School name" />
+
+                                    <TextInput
+                                        id="school_name"
+                                        ref={school_attainment.school_name}
+                                        type="text"
+                                        className="mt-1 block w-full"
+                                        autoComplete="school_name"
+                                    />
+
+                                </div>
+
+                                <div>
+                                    <InputLabel htmlFor="type" value="School type" />
+
+                                    <Select 
+                                        id="school_type"
+                                        className="mt-1 block w-full"
+                                        data={props.school_types}
+                                        val={undefined}
+                                        onSelect={(e) => school_attainment.type = e.label}
+                                    />
+                                </div>
+                                <div>
+                                    <InputLabel htmlFor="year_graduated" value="Year graduated" />
+
+                                    <TextInput
+                                        id="year_graduated"
+                                        ref={school_attainment.year}
+                                        type="text"
+                                        className="mt-1 block w-full"
+                                        autoComplete="year_graduated"
+                                    />
+
+                                </div>
+                                <div>
+                                    <InputLabel htmlFor="address" value="Action" />
+
+                                    <PrimaryButton type="button" onClick={addSchoolAttainment} className="w-full py-2 px-3 justify-center mt-1">Add</PrimaryButton>
+                                </div>
+                            </div>
+                            <Table className="mb-2">
+                                <TableHead>
+                                    <tr>
+                                        <th scope="col" className="px-6 py-3">
+                                            School name
+                                        </th>
+                                        <th scope="col" className="px-6 py-3">
+                                            Type
+                                        </th>
+                                        <th scope="col" className="px-6 py-3">
+                                            Year
+                                        </th>
+                                        <th scope="col" className="px-6 py-3">
+                                            Action
+                                        </th>
+                                    </tr>
+                                </TableHead>
+                                <TableBody>
+                                    { schoolData }
+                                </TableBody>
+                            </Table>
+                        </div>
+                        <hr className="drop-shadow-md" />
+                        <div id="experiences">
+                            <h5 className="my-4 font-bold text-gray-900">Experiences</h5>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-4">
+                                <div>
+                                    <InputLabel htmlFor="company_name" value="Company name" />
+
+                                    <TextInput
+                                        id="company_name"
+                                        ref={employee_experience.company_name}
+                                        type="text"
+                                        className="mt-1 block w-full"
+                                        autoComplete="company_name"
+                                    />
+
+                                </div>
+
+                                <div>
+                                    <InputLabel htmlFor="position" value="Position" />
+
+                                    <TextInput
+                                        id="position"
+                                        ref={employee_experience.position}
+                                        type="text"
+                                        className="mt-1 block w-full"
+                                        autoComplete="position"
+                                    />
+                                </div>
+                            </div>
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-4">
+                                <div>
+                                    <InputLabel htmlFor="start_at" value="Start at" />
+
+                                    <TextInput
+                                        id="start_at"
+                                        ref={employee_experience.start_at}
+                                        type="date"
+                                        className="mt-1 block w-full"
+                                        autoComplete="start_at"
+                                    />
+
+                                </div>
+                                <div>
+                                    <InputLabel htmlFor="end_at" value="End at" />
+
+                                    <TextInput
+                                        id="end_at"
+                                        ref={employee_experience.end_at}
+                                        type="date"
+                                        className="mt-1 block w-full"
+                                        autoComplete="end_at"
+                                    />
+
+                                </div>
+                                <div>
+                                    <InputLabel htmlFor="address" value="Action" />
+
+                                    <PrimaryButton type="button" onClick={addExperience} className="w-full py-2 px-3 justify-center mt-1">Add</PrimaryButton>
+                                </div>
+                            </div>
+                            
+                            <Table className="mb-2">
+                                <TableHead>
+                                    <tr>
+                                        <th scope="col" className="px-6 py-3">
+                                            Company name
+                                        </th>
+                                        <th scope="col" className="px-6 py-3">
+                                            Position
+                                        </th>
+                                        <th scope="col" className="px-6 py-3">
+                                            Duration
+                                        </th>
+                                        <th scope="col" className="px-6 py-3">
+                                            Action
+                                        </th>
+                                    </tr>
+                                </TableHead>
+                                <TableBody>
+                                    { experienceData }
+                                </TableBody>
+                            </Table>
                         </div>
                     </CardBody>
                     <CardFooter>
