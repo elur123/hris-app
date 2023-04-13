@@ -6,50 +6,22 @@ import ButtonLink from '@/Components/ButtonLink'
 import Table from '@/Components/Table'
 import TableHead from '@/Components/TableHead'
 import TableBody from '@/Components/TableBody'
+import DataTable from '@/Components/DataTable';
 import { Head } from '@inertiajs/react';
 
 export default function Employee(props) {
-    const employeeData = props.employees.length ? 
-        props.employees.map((employee) => 
-            {
-                const imageUrl = employee.profile_picture
-                return <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700" key={employee.id}>
-                    <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        { imageUrl ? <img src={imageUrl} alt="Profile picture" width={80} height={80} /> : '' }
-                        { employee.fullname }
-                    </th>
-                    <td className="px-6 py-4">
-                        { employee.email }
-                    </td>
-                    <td className="px-6 py-4">
-                        { employee.contact_no }
-                    </td>
-                    <td className="px-6 py-4">
-                        { employee.branch }
-                    </td>
-                    <td className="px-6 py-4">
-                        { employee.department }
-                    </td>
-                    <td className="px-6 py-4">
-                        { employee.position }
-                    </td>
-                    <td className="px-6 py-4">
-                        { employee.created_at }
-                    </td>
-                    <td className="px-6 py-4">
-                        { employee.updated_at }
-                    </td>
-                    <td className="px-6 py-4">
-                        <ButtonLink href={ employee.actions.edit } className='bg-green-500 hover:text-white hover:bg-green-400'>
-                            Edit
-                        </ButtonLink>
-                    </td>
-                </tr>
-            }    
-        ) : 
-        <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-            <th colSpan={9} scope="row" className="px-6 py-4 font-medium text-center text-gray-900 whitespace-nowrap dark:text-white">No employee data</th>
-        </tr>
+    const columns = ['Employee name', 'Email', 'Phone #', 'Branch', 'Department', 'Position', 'Created At', 'Updated At', 'Actions'];
+    const mapping = {
+        fullname: 'Employee name',
+        email: 'Email',
+        contact_no: 'Phone #',
+        branch: 'Branch',
+        department: 'Department',
+        position: 'Position',
+        created_at: 'Created At',
+        updated_at: 'Updated At',
+        action: 'Actions',
+    };
 
     return (
         <AuthenticatedLayout
@@ -70,43 +42,12 @@ export default function Employee(props) {
                     </ButtonLink>
                 </CardHeader>
                 <CardBody>
-                    <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-                        <Table>
-                            <TableHead>
-                                <tr>
-                                    <th scope="col" className="px-6 py-3">
-                                        Employee name
-                                    </th>
-                                    <th scope="col" className="px-6 py-3">
-                                        Email
-                                    </th>
-                                    <th scope="col" className="px-6 py-3">
-                                        Phone #
-                                    </th>
-                                    <th scope="col" className="px-6 py-3">
-                                        Branch
-                                    </th>
-                                    <th scope="col" className="px-6 py-3">
-                                        Department
-                                    </th>
-                                    <th scope="col" className="px-6 py-3">
-                                        Position
-                                    </th>
-                                    <th scope="col" className="px-6 py-3">
-                                        Created At
-                                    </th>
-                                    <th scope="col" className="px-6 py-3">
-                                        Updated At
-                                    </th>
-                                    <th scope="col" className="px-6 py-3">
-                                        Action
-                                    </th>
-                                </tr>
-                            </TableHead>
-                            <TableBody>
-                                { employeeData }
-                            </TableBody>
-                        </Table>
+                    <div className="relative overflow-x-auto sm:rounded-lg">
+                        <DataTable
+                            columns={columns}
+                            mapping={mapping}
+                            data={props.employees}
+                        />
                     </div>
                 </CardBody>
             </Card>

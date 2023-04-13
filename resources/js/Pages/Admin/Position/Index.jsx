@@ -3,34 +3,17 @@ import Card from '@/Components/Card'
 import CardHeader from '@/Components/CardHeader'
 import CardBody from '@/Components/CardBody'
 import ButtonLink from '@/Components/ButtonLink'
-import Table from '@/Components/Table'
-import TableHead from '@/Components/TableHead'
-import TableBody from '@/Components/TableBody'
+import DataTable from '@/Components/DataTable';
 import { Head } from '@inertiajs/react';
 
 export default function Positions(props) {
-    const positionData = props.positions.length ?  
-        props.positions.map((pos) => 
-            <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700" key={pos.id}>
-                <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    { pos.label }
-                </th>
-                <td className="px-6 py-4">
-                    { pos.created_at }
-                </td>
-                <td className="px-6 py-4">
-                    { pos.updated_at }
-                </td>
-                <td className="px-6 py-4">
-                    <ButtonLink href={ pos.actions.edit } className='bg-green-500 hover:text-white hover:bg-green-400'>
-                        Edit
-                    </ButtonLink>
-                </td>
-            </tr>
-        ) : 
-        <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-            <th colSpan={4} scope="row" className="px-6 py-4 font-medium text-center text-gray-900 whitespace-nowrap dark:text-white">No position data</th>
-        </tr>
+    const columns = ['Position name', 'Created At', 'Updated At', 'Actions'];
+    const mapping = {
+        label: 'Position name',
+        created_at: 'Created At',
+        updated_at: 'Updated At',
+        action: 'Actions'
+    }
 
     return (
         <AuthenticatedLayout
@@ -51,28 +34,12 @@ export default function Positions(props) {
                     </ButtonLink>
                 </CardHeader>
                 <CardBody>
-                    <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-                        <Table>
-                            <TableHead>
-                                <tr>
-                                    <th scope="col" className="px-6 py-3">
-                                        Position name
-                                    </th>
-                                    <th scope="col" className="px-6 py-3">
-                                        Created At
-                                    </th>
-                                    <th scope="col" className="px-6 py-3">
-                                        Updated At
-                                    </th>
-                                    <th scope="col" className="px-6 py-3">
-                                        Action
-                                    </th>
-                                </tr>
-                            </TableHead>
-                            <TableBody>
-                                { positionData }
-                            </TableBody>
-                        </Table>
+                    <div className="relative overflow-x-auto sm:rounded-lg">
+                        <DataTable 
+                            columns={columns}
+                            mapping={mapping}
+                            data={props.positions}
+                        />
                     </div>
                 </CardBody>
             </Card>

@@ -18,6 +18,9 @@ use App\Models\User;
 use App\Models\Branch;
 use App\Models\Position;
 use App\Models\RateType;
+use App\Models\FamilyMember;
+use App\Models\EducationalAttainment;
+use App\Models\EmployeeExperience;
 class EmployeeController extends Controller
 {
     
@@ -220,6 +223,10 @@ class EmployeeController extends Controller
             'email' => $request->email
         ]);
 
+        $this->storeFamilyMembers($employee, $request->family_members);
+        $this->storeEducationalAttainments($employee, $request->school_attainments);
+        $this->storeExperiences($employee, $request->experiences);
+
         
 
         return Redirect::route('employees.index');
@@ -235,15 +242,25 @@ class EmployeeController extends Controller
         }
     }
 
+    public function deleteFamilyMember(FamilyMember $family_member)
+    {
+        $family_member->delete();
+    }
+
     private function storeEducationalAttainments(Employee $employee, $attainments)
     {  
         foreach ($attainments as $key => $value) {
             $employee->educationalAttainments()->create([
                 'school_name' => $value['school_name'],
-                'education_level' => $value['type'],
-                'year_graduated' => $value['year']
+                'education_level' => $value['education_level'],
+                'year_graduated' => $value['year_graduated']
             ]);
         }
+    }
+
+    public function deleteEducationalAttainment(EducationalAttainment $educational_attainment)
+    {
+        $educational_attainment->delete();
     }
 
     private function storeExperiences(Employee $employee, $experiences)
@@ -256,5 +273,10 @@ class EmployeeController extends Controller
                 'end_at' => $value['end_at']
             ]);
         }
+    }
+
+    public function deleteExperience(EmployeeExperience $experience)
+    {
+        $experience->delete();
     }
 }

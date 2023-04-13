@@ -9,7 +9,7 @@ use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\PositionController;
-
+use App\Http\Controllers\AttendanceController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -56,6 +56,19 @@ Route::prefix('employees')->name('employees.')->group(function () {
     Route::post('/store', [EmployeeController::class, 'store'])->name('store');
     Route::get('/{employee}', [EmployeeController::class, 'edit'])->name('edit');
     Route::put('/{employee}', [EmployeeController::class, 'update'])->name('update');
+
+    Route::prefix('delete')->name('delete')->group(function () {
+        Route::delete('/family_member/{family_member}', [EmployeeController::class, 'deleteFamilyMember'])->name('family_member');
+        Route::delete('/educational_attainment/{educational_attainment}', [EmployeeController::class, 'deleteEducationalAttainment'])->name('educational_attainment');
+        Route::delete('/experience/{experience}', [EmployeeController::class, 'deleteExperience'])->name('experience');
+    });
+})->middleware(['auth', 'verified']);
+
+Route::prefix('attendances')->name('attendances.')->group(function () {
+    Route::get('/', [AttendanceController::class, 'index'])->name('index');
+    Route::post('/store', [AttendanceController::class, 'store'])->name('store');
+    Route::get('/{attendance}', [AttendanceController::class, 'edit'])->name('edit');
+    Route::put('/{attendance}', [AttendanceController::class, 'update'])->name('update');
 })->middleware(['auth', 'verified']);
 
 Route::prefix('positions')->name('positions.')->group(function () {

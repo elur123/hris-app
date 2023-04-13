@@ -38,8 +38,8 @@ export default function Create(props) {
 
     const school_attainment = {
         school_name: useRef(),
-        type: 'Elementary',
-        year: useRef(),
+        education_level: 'Elementary',
+        year_graduated: useRef(),
     }
 
     const employee_experience = {
@@ -124,21 +124,22 @@ export default function Create(props) {
 
     // School Attainment functions
     const addSchoolAttainment = () => {
-        if (school_attainment.school_name.current.value == '' || school_attainment.type == '' || school_attainment.year.current.value == '') {
+        if (school_attainment.school_name.current.value == '' || school_attainment.education_level == '' 
+        || school_attainment.year_graduated.current.value == '') {
             alert('Check, field required')
             return;
         }
 
         const newSchoolData = {
             school_name: school_attainment.school_name.current.value,
-            type: school_attainment.type,
-            year: school_attainment.year.current.value
+            education_level: school_attainment.education_level,
+            year_graduated: school_attainment.year_graduated.current.value
         }
 
         setData('school_attainments', [...data.school_attainments, newSchoolData])
 
         school_attainment.school_name.current.value = '';
-        school_attainment.year.current.value = '';
+        school_attainment.year_graduated.current.value = '';
     }
 
     const deleteSchoolAttainment = (index) => {
@@ -159,10 +160,10 @@ export default function Create(props) {
                 { school.school_name }
             </th>
             <td className="px-6 py-4">
-                { school.type }
+                { school.education_level }
             </td>
             <td className="px-6 py-4">
-                { school.year }
+                { school.year_graduated }
             </td>
             <td className="px-6 py-4">
                 <PrimaryButton type="button" onClick={() => deleteSchoolAttainment(index)}>Remove</PrimaryButton>
@@ -588,7 +589,7 @@ export default function Create(props) {
                                         className="mt-1 block w-full"
                                         data={props.school_types}
                                         val={undefined}
-                                        onSelect={(e) => school_attainment.type = e.label}
+                                        onSelect={(e) => school_attainment.education_level = e.label}
                                     />
                                 </div>
                                 <div>
@@ -596,7 +597,7 @@ export default function Create(props) {
 
                                     <TextInput
                                         id="year_graduated"
-                                        ref={school_attainment.year}
+                                        ref={school_attainment.year_graduated}
                                         type="text"
                                         className="mt-1 block w-full"
                                         autoComplete="year_graduated"

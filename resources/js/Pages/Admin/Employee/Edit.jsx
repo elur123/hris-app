@@ -14,7 +14,7 @@ import TableBody from '@/Components/TableBody'
 import PrimaryButton from '@/Components/PrimaryButton';
 
 import { Head } from '@inertiajs/react';
-import { useForm } from '@inertiajs/react';
+import { useForm, router } from '@inertiajs/react';
 import { useRef, useState, useEffect } from 'react';
 
 export default function Update(props) {
@@ -91,6 +91,9 @@ export default function Update(props) {
     }
 
     const removeFamilyMember = (index) => {
+        if (typeof data.family_members[index]['id'] !== "undefined") {
+            router.delete(`/employees/delete/family_member/${data.family_members[index]['id']}`)
+        }
         setData(prevData => {
             const newFamilyMembers = [...prevData.family_members];
             newFamilyMembers.splice(index, 1);
@@ -124,7 +127,7 @@ export default function Update(props) {
     // School Attainment functions
     const addSchoolAttainment = () => {
         if (school_attainment.school_name.current.value == '' || school_attainment.education_level == '' 
-        || school_attainment.year_graduated.value == '') {
+        || school_attainment.year_graduated.current.value == '') {
             alert('Check, field required')
             return;
         }
@@ -142,6 +145,9 @@ export default function Update(props) {
     }
 
     const deleteSchoolAttainment = (index) => {
+        if (typeof data.school_attainments[index]['id'] !== "undefined") {
+            router.delete(`/employees/delete/educational_attainment/${data.school_attainments[index]['id']}`)
+        }
         setData(prevData => {
             const newSchoolData = [...prevData.school_attainments];
             newSchoolData.splice(index, 1);
@@ -201,6 +207,9 @@ export default function Update(props) {
     }
 
     const removeEmployeeExperience = (index) => {
+        if (typeof data.experiences[index]['id'] !== "undefined") {
+            router.delete(`/employees/delete/experience/${data.experiences[index]['id']}`)
+        }
         setData(prevData => {
             const newExperience = [...prevData.experiences];
             newExperience.splice(index, 1);
