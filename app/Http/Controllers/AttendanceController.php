@@ -15,6 +15,7 @@ class AttendanceController extends Controller
     {
         return Inertia::render('Admin/Attendance/Index', [
             'attendances' => Attendance::query()
+            ->whereDate('start_at', date('Y-m-d'))
             ->with('employee', 'branch')
             ->get()
             ->map(function($attendance) {
