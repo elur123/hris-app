@@ -13,10 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('attendances', function (Blueprint $table) {
+        Schema::create('attendance_histories', function (Blueprint $table) {
             $table->id();
-            $table->integer('employee_id');
-            $table->integer('branch_id');
+            $table->integer('attendance_id');
             $table->dateTime('start_at')->nullable();
             $table->dateTime('end_at')->nullable();
         });
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('attendances');
+        Schema::dropIfExists('attendance_histories');
     }
 };

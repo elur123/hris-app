@@ -22,7 +22,7 @@ export default function Clock(props) {
         post(route('clock.store'), {
             preserveScroll: true,
             onSuccess: (data) => {
-                getHistory(data.props.flash.data)
+                getHistory(data.props.flash.data.histories)
                 setTimeout(clearHistory, 5000)
             },
             onError: () => {},

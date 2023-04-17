@@ -11,6 +11,7 @@ use App\Http\Controllers\BranchController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\HolidayController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -91,6 +92,14 @@ Route::middleware('auth')->group(function () {
         Route::post('/store', [PositionController::class, 'store'])->name('store');
         Route::get('/{position}', [PositionController::class, 'edit'])->name('edit');
         Route::put('/{position}', [PositionController::class, 'update'])->name('update');
+    });
+
+    Route::prefix('holidays')->name('holidays.')->group(function () {
+        Route::get('/', [HolidayController::class, 'index'])->name('index');
+        Route::get('/create', [HolidayController::class, 'create'])->name('create');
+        Route::post('/store', [HolidayController::class, 'store'])->name('store');
+        Route::get('/{holiday}', [HolidayController::class, 'edit'])->name('edit');
+        Route::put('/{holiday}', [HolidayController::class, 'update'])->name('update');
     });
 });
 

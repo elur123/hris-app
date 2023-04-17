@@ -13,12 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('attendances', function (Blueprint $table) {
+        Schema::create('holidays', function (Blueprint $table) {
             $table->id();
-            $table->integer('employee_id');
-            $table->integer('branch_id');
-            $table->dateTime('start_at')->nullable();
-            $table->dateTime('end_at')->nullable();
+            $table->string('slug');
+            $table->string('name');
+            $table->string('month');
+            $table->integer('from');
+            $table->integer('to');
+            $table->string('type');
+            $table->double('rate', 8, 2);
+            $table->timestamps();
         });
     }
 
@@ -29,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('attendances');
+        Schema::dropIfExists('holidays');
     }
 };

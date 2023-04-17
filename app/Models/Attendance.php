@@ -23,4 +23,9 @@ class Attendance extends Model
     {
         return $this->belongsTo(Branch::class, 'branch_id');
     }
+
+    public function histories()
+    {
+        return $this->hasMany(AttendanceHistory::class, 'attendance_id');
+    }
 }
