@@ -25,7 +25,7 @@ class AttendanceController extends Controller
                     'fullname' => $attendance->employee->user->name,
                     'branch' => $attendance->branch->name,
                     'start_at' => date("F j, Y, g:i a", strtotime($attendance->start_at)),
-                    'end_at' => date("F j, Y, g:i a", strtotime($attendance->end_at)),
+                    'end_at' => $attendance->end_at !== null ? date("F j, Y, g:i a", strtotime($attendance->end_at)) : 'No timeout',
                     'actions' => [
                         'edit' => route('attendances.edit', $attendance)
                     ]

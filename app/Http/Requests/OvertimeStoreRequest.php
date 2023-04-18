@@ -3,11 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\Holiday;
 
-class HolidayStoreRequest extends FormRequest
+class OvertimeStoreRequest extends FormRequest
 {
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -16,12 +14,9 @@ class HolidayStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required'],
-            'month' => ['required'],
+            'date_overtime' => ['required'],
             'from' => ['required'],
-            'to' => ['required'],
-            'type' => ['required'],
-            'rate' => ['required'],
+            'to' => ['required']
         ];
     }
 }

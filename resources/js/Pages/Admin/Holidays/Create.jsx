@@ -13,12 +13,14 @@ import { Head, useForm } from '@inertiajs/react';
 import { useRef } from 'react';
 
 export default function Create(props) {
+    const name = useRef();
     const from = useRef();
     const to = useRef();
     const type = useRef();
     const rate = useRef();
 
     const { data, setData, errors, post, reset, processing, recentlySuccessful } = useForm({
+        name: '',
         month: 'January',
         from: '',
         to: '',
@@ -51,6 +53,20 @@ export default function Create(props) {
                     </CardHeader>
                     <CardBody>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <InputLabel htmlFor="name" value="Name" />
+
+                                <TextInput
+                                    id="name"
+                                    ref={name}
+                                    type="text"
+                                    className="mt-1 block w-full"
+                                    onChange={(e) => setData('name', e.target.value)}
+                                    autoComplete="name"
+                                />
+
+                                <InputError message={errors.name} className="mt-2" />
+                            </div>
                             <div>
                                 <InputLabel htmlFor="month" value="Month" />
 
@@ -100,7 +116,7 @@ export default function Create(props) {
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                             <div>
-                                <InputLabel htmlFor="type" value="Type [International, National, Special, Others]" />
+                                <InputLabel htmlFor="type" value="Type [National, Special, Others]" />
 
                                 <TextInput
                                     id="type"

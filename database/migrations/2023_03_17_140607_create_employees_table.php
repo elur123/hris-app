@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('place_of_birth')->nullable();
             $table->string('current_address')->nullable();
             $table->string('contact_no')->nullable();
+            $table->integer('leave_credits')->default(25)->nullable();
             $table->double('rate', 10, 2);
             $table->integer('rate_type_id');
             $table->integer('position_id');

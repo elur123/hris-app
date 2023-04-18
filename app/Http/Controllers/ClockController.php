@@ -10,6 +10,7 @@ use Inertia\Response;
 
 use App\Models\Employee;
 use App\Models\Attendance;
+use App\Models\Holiday;
 class ClockController extends Controller
 {
     
@@ -29,24 +30,18 @@ class ClockController extends Controller
             return Redirect::back()->withErrors(['employee_key' => 'Employee not found']);
         }
 
-        // $attendance = Attendance::where('employee_id', $employee->id)
-        // ->whereDate('start_at', date('Y-m-d'))
-        // ->whereNull('end_at')
-        // ->get()
-        // ->last();
-
         $attendance = Attendance::where('employee_id', $employee->id)
         ->whereDate('start_at', date('Y-m-d'))
         ->first();
 
-
         if ($attendance === null) 
         {
-            
+
             $attendance =  Attendance::create([
                 'employee_id' => $employee->id,
                 'branch_id' => $employee->branch_id,
-                'start_at' => date('Y-m-d H:i:s')
+                'start_at' => date('Y-m-d H:i:s'),
+                'holiday_percent' => $this->holidayRate()
             ]);
 
             $attendance->histories()->create([
@@ -102,5 +97,16 @@ class ClockController extends Controller
         });
 
         return Redirect::back()->with('data', $attendances[0]);
+    }
+
+    public function holidayRate()
+    {
+        $holiday = Holiday::query()
+        ->where('month', date('F'))
+        ->where('from', '<=', intval(date('d')))
+        ->where('to', '>=', intval(date('d')))
+        ->first();
+
+        return $holiday->rate ?? 0;
     }
 }

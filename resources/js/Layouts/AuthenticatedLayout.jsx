@@ -48,6 +48,14 @@ return (
                   <span className="ml-3">Attendances</span>
                </NavLink>
             </li>
+            <li>
+               <NavLink href={route('overtimerequests.index')} active={route().current('overtimerequests.*')}>
+                  <svg className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span className="ml-3">Overtime Request</span>
+               </NavLink>
+            </li>
             <hr />
             <li>
                <a href="#" className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">

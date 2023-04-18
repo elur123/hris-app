@@ -13,13 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('attendances', function (Blueprint $table) {
+        Schema::create('overtime_requests', function (Blueprint $table) {
             $table->id();
             $table->integer('employee_id');
-            $table->integer('branch_id');
-            $table->integer('holiday_percent')->default(0)->nullable();
-            $table->dateTime('start_at')->nullable();
-            $table->dateTime('end_at')->nullable();
+            $table->date('overtime_at');
+            $table->time('from');
+            $table->time('to');
+            $table->string('notes')->nullable();
+            $table->integer('status_id');
+            $table->integer('approved_hours')->nullable();
+            $table->integer('checked_by')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -30,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('attendances');
+        Schema::dropIfExists('overtime_requests');
     }
 };

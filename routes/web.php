@@ -12,6 +12,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\HolidayController;
+use App\Http\Controllers\OvertimeRequestController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -84,6 +85,14 @@ Route::middleware('auth')->group(function () {
         Route::post('/store', [AttendanceController::class, 'store'])->name('store');
         Route::get('/{attendance}', [AttendanceController::class, 'edit'])->name('edit');
         Route::put('/{attendance}', [AttendanceController::class, 'update'])->name('update');
+    });
+
+    Route::prefix('overtimerequests')->name('overtimerequests.')->group(function () {
+        Route::get('/', [OvertimeRequestController::class, 'index'])->name('index');
+        Route::get('/create', [OvertimeRequestController::class, 'create'])->name('create');
+        Route::post('/store', [OvertimeRequestController::class, 'store'])->name('store');
+        Route::get('/{overtime}', [OvertimeRequestController::class, 'edit'])->name('edit');
+        Route::put('/{overtime}', [OvertimeRequestController::class, 'update'])->name('update');
     });
     
     Route::prefix('positions')->name('positions.')->group(function () {

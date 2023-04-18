@@ -69,7 +69,6 @@ const DataTable = ({ columns, data, itemsPerPage = 10, mapping, emptyText = 'No 
             ) : ( currentItems.map((item, index) => (
                 <tr key={item.id} 
                     className={index % 2 === 0 ? " bg-gray-100 hover:bg-gray-300" : " hover:bg-gray-300"}
-                    onDoubleClick={() => router.get(item.actions.edit)}
                 >
                   {columns.map(column => {
                     if (column === 'Actions') {

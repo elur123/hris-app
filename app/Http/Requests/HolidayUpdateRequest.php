@@ -9,6 +9,7 @@ class HolidayUpdateRequest extends FormRequest
     public function rules()
     {
         return [
+            'name' => ['required'],
             'month' => ['required'],
             'from' => ['required'],
             'to' => ['required'],

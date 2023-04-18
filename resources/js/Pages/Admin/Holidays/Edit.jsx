@@ -15,6 +15,7 @@ import { useRef } from 'react';
 export default function Create(props) {
 
     const { data, setData, errors, put, reset, processing, recentlySuccessful } = useForm({
+        name: props.holiday.name,
         month: props.holiday.month,
         from: props.holiday.from,
         to: props.holiday.to,
@@ -47,6 +48,20 @@ export default function Create(props) {
                     </CardHeader>
                     <CardBody>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <InputLabel htmlFor="name" value="Name" />
+
+                                <TextInput
+                                    id="name"
+                                    type="text"
+                                    className="mt-1 block w-full"
+                                    value={data.name}
+                                    onChange={(e) => setData('name', e.target.value)}
+                                    autoComplete="name"
+                                />
+
+                                <InputError message={errors.name} className="mt-2" />
+                            </div>
                             <div>
                                 <InputLabel htmlFor="month" value="Month" />
 
