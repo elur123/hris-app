@@ -76,4 +76,18 @@ class OvertimeRequestController extends Controller
 
         return Redirect::route('overtimerequests.index');
     }
+
+    public function checked(Request $request, OvertimeRequest $overtime): RedirectResponse
+    {
+        $status = $request->type === 'Approved' ? 2 : 3;
+        $approvedHours = $request->type === 'Approved' ? $request->approvedHours : 0;
+
+        $overtime->update([
+            'approved_hours' => $approvedHours,
+            'status_id' => $status,
+            'checked_by' => auth()->user()->id
+        ]);
+
+        return Redirect::route('overtimerequests.index');
+    }
 }

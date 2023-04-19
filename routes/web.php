@@ -25,15 +25,16 @@ use App\Http\Controllers\OvertimeRequestController;
 */
 
 Route::get('/', function () {
-    // return Inertia::render('Welcome', [
-    //     'canLogin' => Route::has('login'),
-    //     'canRegister' => Route::has('register'),
-    //     'laravelVersion' => Application::VERSION,
-    //     'phpVersion' => PHP_VERSION,
-    // ]);
-    return Inertia::render('Auth/Login', [
-        'canResetPassword' => true
+    return Inertia::render('Welcome', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+        'date' => date('D, j F Y')
     ]);
+    // return Inertia::render('Auth/Login', [
+    //     'canResetPassword' => true
+    // ]);
 });
 
 Route::get('/dashboard', function () {
@@ -93,6 +94,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/store', [OvertimeRequestController::class, 'store'])->name('store');
         Route::get('/{overtime}', [OvertimeRequestController::class, 'edit'])->name('edit');
         Route::put('/{overtime}', [OvertimeRequestController::class, 'update'])->name('update');
+        Route::put('/checked/{overtime}', [OvertimeRequestController::class, 'checked'])->name('checked');
     });
     
     Route::prefix('positions')->name('positions.')->group(function () {

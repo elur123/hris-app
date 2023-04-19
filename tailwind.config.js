@@ -15,6 +15,19 @@ module.exports = {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
         },
+        spacing: {
+            '0': '0px',
+            '1': '8px',
+            '2': '12px',
+            '3': '16px',
+            '4': '24px',
+            '5': '32px',
+            '6': '48px',
+            '7': '52px',
+            '8': '56px',
+            '9': '60px',
+            '10': '64px'
+        }
     },
 
     plugins: [require('@tailwindcss/forms')],

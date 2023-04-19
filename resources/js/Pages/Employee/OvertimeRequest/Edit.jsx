@@ -7,18 +7,30 @@ import TextInput from '@/Components/TextInput';
 import TextAreaInput from '@/Components/TextAreaInput';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
+import Modal from '@/Components/Modal';
 import PrimaryButton from '@/Components/PrimaryButton';
+import Button from '@/Components/Button';
 
-import { Head, useForm } from '@inertiajs/react';
+import { Head, useForm, router } from '@inertiajs/react';
+import { useState } from 'react';
 
 export default function Create(props) {
+    const [approveModal, showApproveModal] = useState(false);
 
-    const { data, setData, errors, put, reset, processing, recentlySuccessful } = useForm({
+    const [approvedHours, setApprovedHours] = useState(0)
+
+    const { data, setData, errors, put, reset, processing } = useForm({
         date_overtime: props.overtime.overtime_at,
         from: props.overtime.from,
         to: props.overtime.to,
         notes: props.overtime.notes,
     });
+
+    const checkedOverTime = (type) => {
+        console.log(approvedHours);
+        router.put(`/overtimerequests/checked/${props.overtime.id}`, {  type,  approvedHours})
+        showApproveModal(false)
+    }
 
     const updateOvertimeRequest = (e) => {
         e.preventDefault();
@@ -29,6 +41,12 @@ export default function Create(props) {
             onError: () => {},
         });
     };
+
+    const actions = props.overtime.status_id === 1 ?
+                <>
+                    <PrimaryButton disabled={processing}>Update</PrimaryButton>
+                    <Button type="button" className="bg-green-500 hover:bg-green-600" onClick={() => showApproveModal(true)}>Checked</Button>
+                </> : <h4>No actions</h4>
 
     return (
         <AuthenticatedLayout
@@ -106,11 +124,41 @@ export default function Create(props) {
                             <InputError message={errors.notes} className="mt-2" />
                         </div>
                     </CardBody>
-                    <CardFooter>
-                        <PrimaryButton disabled={processing}>Update</PrimaryButton>
+                    <CardFooter className={'flex justify-between'}>
+                        {actions}
                     </CardFooter>
                 </form>
             </Card>
+
+            {/* Checked Modal */}
+            <Modal show={approveModal}>
+                <div className="p-4 border border-bottom flex justify-between items-center">
+                    <h1 className="text-2xl">Approved Overtime Request</h1>
+                    <Button type="button" className="bg-gray-500 hover:bg-gray-600" onClick={() => showApproveModal(false)}>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </Button>
+                </div>
+                <div className="p-4 border border-bottom">
+                        <div>
+                            <InputLabel htmlFor="approved_hours" value="Approved Hours" />
+
+                            <TextInput
+                                id="approved_hours"
+                                value={approvedHours}
+                                onChange={(e) => setApprovedHours(e.target.value)}
+                                type="number"
+                                className="mt-1 block w-full"
+                                autoComplete="approved_hours"
+                            />
+                        </div>
+                </div>
+                <div className="p-4 flex justify-between items-center">
+                    <Button type="button" className="bg-green-500 hover:bg-green-600" onClick={() => checkedOverTime('Approved')}>Approved</Button>
+                    <Button type="button" className="bg-red-500 hover:bg-red-600" onClick={() => checkedOverTime('Disapproved')}>Disapproved</Button>
+                </div>
+            </Modal>
         </AuthenticatedLayout>
     );
 }
