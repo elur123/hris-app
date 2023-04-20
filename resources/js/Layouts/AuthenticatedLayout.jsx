@@ -9,15 +9,15 @@ export default function Authenticated({ auth, header, children }) {
 const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
 
 return (
-<div className="min-h-screen bg-gray-100">
+<div className="w-full min-h-screen bg-gray-100">
 
    <aside id="logo-sidebar" className="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
       <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
             <Link href="/" className="flex flex-wrap justify-center content-center gap-2">
-                  <ApplicationLogo className="block h-9 w-auto fill-current text-white" />
+                  <ApplicationLogo className="block h-5 w-auto fill-current text-white" />
                   <p className="text-white text-xl">HRIS</p>
             </Link>
-         <ul className="space-y-2 mt-4">
+         <ul className="space-y-1 mt-4">
             <li>
                <NavLink href={route('dashboard')} active={route().current('dashboard')}>
                   <svg aria-hidden="true" className="w-4 h-4 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path></svg>
@@ -102,7 +102,7 @@ return (
 
    <div className="sm:ml-64">
       <nav className="bg-white border-b border-gray-100">
-         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+         <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
                <div className="flex justify-between h-16">
                   <div className="flex">
                      <div className="md:hidden shrink-0 flex items-center">
@@ -201,8 +201,8 @@ return (
       </nav>
 
       {header && (
-      <header className="bg-white shadow">
-         <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">{header}</div>
+      <header className="px-4 bg-white shadow">
+         <div className="max-w-8xl mx-auto py-4 px-8 sm:px-4 lg:px-8">{header}</div>
       </header>
       )}
 

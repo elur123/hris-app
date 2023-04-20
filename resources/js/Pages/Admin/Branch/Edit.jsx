@@ -78,7 +78,7 @@ export default function Edit(props) {
             <Card>
                 <form onSubmit={createBranch}>
                     <CardHeader className=''>
-                        <h3 className="p-6 text-gray-900">Update branch</h3>
+                        <h3 className="p-4 text-gray-900">Update branch</h3>
                     </CardHeader>
                     <CardBody>
                         <div className='mb-2'>

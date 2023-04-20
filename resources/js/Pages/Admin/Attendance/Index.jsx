@@ -24,7 +24,7 @@ export default function Branch(props) {
             <Head title="Attendance" />
 
             <Card>
-                <CardHeader className='p-6 flex justify-between content-center'>
+                <CardHeader className='p-4 flex justify-between items-center'>
                     <h3 className="text-gray-900">Attendance List</h3>
                 </CardHeader>
                 <CardBody>

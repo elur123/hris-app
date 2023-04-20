@@ -70,19 +70,67 @@ export default function Welcome(props) {
                     </div>
                 </div>
             </div>
-            <section className="container mx-auto py-10">
+            <section className="container mx-auto my-8 py-10">
                 <div className="grid grid-cols-2 gap-6 items-center">
                     <div className="py-1">
                         <h1 className="py-3 text-6xl text-cyan-800 font-extrabold leading-tight">Maximizing Your Workforce Potential</h1>
                         <p className="py-3 text-gray-400 leading-relaxed">Humanage is a people management solution that helps in employee onboarding, performance tracking,
                             payroll, and attendance management.
                         </p>
-                        <div className="py-3">
+                        <div className="my-3">
                             <div className="flex gap-3">
                                 <Link href={route('login')} className="px-4 py-2 font-extrabold bg-green-500 text-white rounded-lg">Start for free</Link>
                                 <Link href={route('register')} className="px-4 py-2 font-extrabold text-cyan-800 border border-cyan-800 rounded-lg">Meet an Expert</Link>
                             </div>
                             <p className="py-3 text-gray-400">Setup in 5 minutes. No credit card required.</p>
+                        </div>
+                        <div className="my-5">
+                            <div className="flex items-center gap-7">
+                                <div className="flex items-center gap-2">
+                                    <div className="p-3 bg-gray-100 rounded-full">
+                                        <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
+                                        </svg>
+                                    </div>
+                                    <div className="flex flex-col justify-start gap-1">
+                                        <div className="flex items-center px-1 gap-2">
+                                            <p className="text-gray-400">Capterra</p>
+                                            <span className="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span>
+                                            <p className="text-cyan-900 font-extrabold">4.9</p>
+                                        </div>
+                                        <div className="flex items-center px-1">
+                                            <svg aria-hidden="true" className="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>First star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                            <svg aria-hidden="true" className="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Second star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                            <svg aria-hidden="true" className="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Third star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                            <svg aria-hidden="true" className="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Fourth star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                            <svg aria-hidden="true" className="w-4 h-4 text-gray-300 dark:text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Fifth star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <div className="p-3 bg-gray-100 rounded-full">
+                                        <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
+                                        </svg>
+                                    </div>
+                                    <div className="flex flex-col justify-start gap-1">
+                                        <div className="flex items-center px-1 gap-2">
+                                            <p className="text-gray-400">Capterra</p>
+                                            <span className="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span>
+                                            <p className="text-cyan-900 font-extrabold">4.9</p>
+                                        </div>
+                                        <div className="flex items-center px-1">
+                                            <svg aria-hidden="true" className="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>First star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                            <svg aria-hidden="true" className="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Second star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                            <svg aria-hidden="true" className="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Third star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                            <svg aria-hidden="true" className="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Fourth star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                            <svg aria-hidden="true" className="w-4 h-4 text-gray-300 dark:text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Fifth star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div className="w-full h-full overflow-hidden relative rounded-2xl">
@@ -128,32 +176,32 @@ export default function Welcome(props) {
                                         <div className="pr-6 border-r-2">
                                             <p className="my-2  text-gray-400">Payroll Summary</p>
                                             <h4 className="my-2 text-4xl font-bold text-cyan-900">$32,000</h4>
-                                            <Button className="my-2 px-2 py-1 flex items-center gap-1 border border-cyan-900 rounded-lg text-sm text-cyan-900">
+                                            <Button className="my-2 px-2 py-1 flex items-center gap-1 text-sm text-cyan-900 border border-cyan-800 rounded-lg">
                                                 <span>See Details</span>
                                                 <svg className="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
                                                     <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
                                                 </svg>
                                             </Button>
                                         </div>
-                                        <div className="px-2 flex-1 grid grid-cols-5 gap-4 content-end">
-                                            <div className="flex flex-col">
-                                                <div className="h-24 bg-cyan-100"></div>
+                                        <div className="px-2 flex flex-wrap justify-evenly flex-1 gap-4 content-end">
+                                            <div className="flex flex-col items-center">
+                                                <div className="w-full h-full py-2 text-cyan-100 bg-cyan-100 rounded-md">t</div>
                                                 <span>Jan</span>
                                             </div>
-                                            <div className="flex flex-col">
-                                                <span className="w-full h-1/2 bg-cyan-100"></span>
+                                            <div className="flex flex-col items-center">
+                                                <span className="w-full h-full py-3 text-cyan-100 bg-cyan-100 rounded-md">t</span>
                                                 <span>Feb</span>
                                             </div>
-                                            <div className="flex flex-col">
-                                                <span className="w-full h-1/2 bg-cyan-100"></span>
+                                            <div className="flex flex-col items-center">
+                                                <span className="w-full h-full py-5 text-cyan-100 bg-cyan-100 rounded-md">t</span>
                                                 <span>Mar</span>
                                             </div>
-                                            <div className="flex flex-col">
-                                                <span className="w-full h-1/2 bg-cyan-100"></span>
+                                            <div className="flex flex-col items-center">
+                                                <span className="w-full h-full py-4 text-cyan-100 bg-cyan-100 rounded-md">t</span>
                                                 <span>Apr</span>
                                             </div>
-                                            <div className="flex flex-col">
-                                                <span className="w-full h-1/2 bg-cyan-100"></span>
+                                            <div className="flex flex-col items-center">
+                                                <span className="w-full h-full py-2 text-cyan-100 bg-cyan-100 rounded-md">t</span>
                                                 <span>May</span>
                                             </div>
                                         </div>
@@ -164,7 +212,86 @@ export default function Welcome(props) {
                     </div>
                 </div>
             </section>
-
+            <div className="container mx-auto my-8 py-10">
+                <h3 className="w-1/2 mx-auto py-3 text-center text-cyan-800 text-2xl font-bold">Join over 1,000+ companies around the world that trust the Humanage Platfor.</h3>
+                <div className="my-8 py-3 flex justify-between items-center">
+                    <h4 className="text-3xl text-gray-400 font-bold">Company One</h4>
+                    <h4 className="text-3xl text-gray-400 font-bold">Company Two</h4>
+                    <h4 className="text-3xl text-gray-400 font-bold">Company Three</h4>
+                    <h4 className="text-3xl text-gray-400 font-bold">Company Four</h4>
+                </div>
+            </div>
+            <section className="container mx-auto my-8 py-10 bg-gray-100 rounded-3xl">
+                <h1 className="w-1/2 mx-auto py-3 text-center text-5xl text-cyan-800 font-extrabold leading-tight">Traditional HR Software Is Outdated. Why Humanage?</h1>
+                <p className="w-1/2 mx-auto py-3 text-center text-xl text-gray-500 leading-relaxed">Humanage helps your teams to your organization, empowers your employees with self-service tools,
+                 and allow them to connect with each other in a personal way.
+                </p>
+                <div className="w-full mt-8 p-5 flex gap-5">
+                    <div className="p-3 w-full h-[360px] group overflow-hidden flex flex-col justify-between bg-white rounded-xl hover:bg-cyan-900 hover:gap-2" id="card">
+                        <div id="icon" className="w-10 p-1 bg-gray-100 rounded-xl group-hover:bg-green-300">
+                            <svg className="w-6 h-6 group-hover:text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 7.125C2.25 6.504 2.754 6 3.375 6h6c.621 0 1.125.504 1.125 1.125v3.75c0 .621-.504 1.125-1.125 1.125h-6a1.125 1.125 0 01-1.125-1.125v-3.75zM14.25 8.625c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v8.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-8.25zM3.75 16.125c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-2.25z" />
+                            </svg>
+                        </div>
+                        <div className="w-full transition-all ease-in-out delay-150 group-hover:flex-1" id="content">
+                            <div id="header">
+                                <p className="text-gray-600 group-hover:text-gray-400">Simplicity</p>
+                                <h3 className="py-2 text-cyan-800 text-2xl font-bold group-hover:text-white">Focus on Thing That Are More Important</h3>
+                            </div>
+                            <div id="body" className="w-full h-0 transition-all ease-in-out delay-150 opacity-0 group-hover:h-full group-hover:opacity-100">
+                                <p className="w-full text-gray-400">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="p-3 w-full h-[360px] group overflow-hidden flex flex-col justify-between bg-white rounded-xl hover:bg-cyan-900 hover:gap-2" id="card">
+                        <div id="icon" className="w-10 p-1 bg-gray-100 rounded-xl group-hover:bg-green-300">
+                            <svg className="w-6 h-6 group-hover:text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 7.125C2.25 6.504 2.754 6 3.375 6h6c.621 0 1.125.504 1.125 1.125v3.75c0 .621-.504 1.125-1.125 1.125h-6a1.125 1.125 0 01-1.125-1.125v-3.75zM14.25 8.625c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v8.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-8.25zM3.75 16.125c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-2.25z" />
+                            </svg>
+                        </div>
+                        <div className="w-full transition-all ease-in-out delay-150 group-hover:flex-1" id="content">
+                            <div id="header">
+                                <p className="text-gray-600 group-hover:text-gray-400">Flexibility</p>
+                                <h3 className="py-2 text-cyan-800 text-2xl font-bold group-hover:text-white">Focus on Thing That Are More Important</h3>
+                            </div>
+                            <div id="body" className="w-full h-0 transition-all ease-in-out delay-150 opacity-0 group-hover:h-full group-hover:opacity-100">
+                                <p className="w-full text-gray-400">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="p-3 w-full h-[360px] group overflow-hidden flex flex-col justify-between bg-white rounded-xl hover:bg-cyan-900 hover:gap-2" id="card">
+                        <div id="icon" className="w-10 p-1 bg-gray-100 rounded-xl group-hover:bg-green-300">
+                            <svg className="w-6 h-6 group-hover:text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 7.125C2.25 6.504 2.754 6 3.375 6h6c.621 0 1.125.504 1.125 1.125v3.75c0 .621-.504 1.125-1.125 1.125h-6a1.125 1.125 0 01-1.125-1.125v-3.75zM14.25 8.625c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v8.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-8.25zM3.75 16.125c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-2.25z" />
+                            </svg>
+                        </div>
+                        <div className="w-full transition-all ease-in-out delay-150 group-hover:flex-1" id="content">
+                            <div id="header">
+                                <p className="text-gray-600 group-hover:text-gray-400">Productivity</p>
+                                <h3 className="py-2 text-cyan-800 text-2xl font-bold group-hover:text-white">Focus on Thing That Are More Important</h3>
+                            </div>
+                            <div id="body" className="w-full h-0 transition-all ease-in-out delay-150 opacity-0 group-hover:h-full group-hover:opacity-100">
+                                <p className="w-full text-gray-400">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section className="container mx-auto my-8 py-10">
+                <h1 className="w-1/2 mx-auto py-3 text-center text-5xl text-cyan-800 font-extrabold leading-tight">Empower Employees and Automate HR Processes</h1>
+                <div className="w-full mt-8 p-5 flex gap-5">
+                    
+                </div>
+            </section>
         </>
     );
 }

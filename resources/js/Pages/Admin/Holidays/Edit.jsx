@@ -44,7 +44,7 @@ export default function Create(props) {
             <Card>
                 <form onSubmit={updateDepartment}>
                     <CardHeader className=''>
-                        <h3 className="p-6 text-gray-900">Update holiday</h3>
+                        <h3 className="p-4 text-gray-900">Update holiday</h3>
                     </CardHeader>
                     <CardBody>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">

@@ -272,7 +272,7 @@ export default function Update(props) {
             <Card>
                 <form onSubmit={updateEmployee}>
                     <CardHeader className=''>
-                        <h3 className="p-6 font-bold text-gray-900">Update new employee</h3>
+                        <h3 className="p-4 font-bold text-gray-900">Update new employee</h3>
                     </CardHeader>
                     <CardBody>
                         <div id="personal-information">

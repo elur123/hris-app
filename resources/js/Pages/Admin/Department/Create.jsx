@@ -45,7 +45,7 @@ export default function Create(props) {
             <Card>
                 <form onSubmit={createDepartment}>
                     <CardHeader className=''>
-                        <h3 className="p-6 text-gray-900">Create new department</h3>
+                        <h3 className="p-4 text-gray-900">Create new department</h3>
                     </CardHeader>
                     <CardBody>
                         <div>

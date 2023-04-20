@@ -3,7 +3,7 @@ export default function Button({ className = '', disabled, children, ...props })
         <button
             {...props}
             className={
-                `text-center border border-transparent uppercase transition ease-in-out duration-150 ${
+                `text-center uppercase transition ease-in-out duration-150 ${
                     disabled && 'opacity-25'
                 } ` + className
             }

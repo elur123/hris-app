@@ -38,7 +38,7 @@ export default function Edit(props) {
             <Card>
                 <form onSubmit={updatePosition}>
                     <CardHeader className=''>
-                        <h3 className="p-6 text-gray-900">Update position</h3>
+                        <h3 className="p-4 text-gray-900">Update position</h3>
                     </CardHeader>
                     <CardBody>
                         <div>

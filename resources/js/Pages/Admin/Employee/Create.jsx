@@ -269,7 +269,7 @@ export default function Create(props) {
             <Card>
                 <form onSubmit={createEmployee}>
                     <CardHeader className=''>
-                        <h3 className="p-6 font-bold text-gray-900">Create new employee</h3>
+                        <h3 className="p-4 font-bold text-gray-900">Create new employee</h3>
                     </CardHeader>
                     <CardBody>
                         <div id="personal-information" className="mb-4">

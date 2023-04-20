@@ -54,7 +54,7 @@ const DataTable = ({ columns, data, itemsPerPage = 10, mapping, emptyText = 'No 
         <thead className={'text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 '}>
           <tr>
             {columns.map(column => (
-              <th scope="col" className="px-6 py-3 border text-white" key={column}>{column}</th>
+              <th scope="col" className="px-4 py-3 border text-white" key={column}>{column}</th>
             ))}
           </tr>
         </thead>
@@ -72,14 +72,14 @@ const DataTable = ({ columns, data, itemsPerPage = 10, mapping, emptyText = 'No 
                 >
                   {columns.map(column => {
                     if (column === 'Actions') {
-                        return (<td className="border px-6 py-4" key={column}>
+                        return (<td className="border px-4 py-3" key={column}>
                             <ButtonLink href={ item.actions.edit } className='bg-green-500 hover:text-white hover:bg-green-400'>
                                 Edit
                             </ButtonLink>
                         </td>)
                     }
                     else{
-                       return (<td className="border px-6 py-4" key={column}>{item[getMappedColumnName(column)]}</td>)
+                       return (<td className="border px-4 py-3" key={column}>{item[getMappedColumnName(column)]}</td>)
                     }
                   })}
                 </tr>

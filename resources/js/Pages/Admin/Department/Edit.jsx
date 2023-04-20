@@ -43,7 +43,7 @@ export default function Edit(props) {
             <Card>
                 <form onSubmit={updateDepartment}>
                     <CardHeader className=''>
-                        <h3 className="p-6 text-gray-900">Update department</h3>
+                        <h3 className="p-4 text-gray-900">Update department</h3>
                     </CardHeader>
                     <CardBody>
                         <div>
