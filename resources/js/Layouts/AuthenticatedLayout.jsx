@@ -11,7 +11,7 @@ const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false
 return (
 <div className="w-full min-h-screen bg-gray-100">
 
-   <aside id="logo-sidebar" className="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
+   <aside id="logo-sidebar" className={'fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0' + (showingNavigationDropdown ? ' translate-x-0' : ' -translate-x-full')} aria-label="Sidebar">
       <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
             <Link href="/" className="flex flex-wrap justify-center content-center gap-2">
                   <ApplicationLogo className="block h-5 w-auto fill-current text-white" />
@@ -54,6 +54,23 @@ return (
                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                   <span className="ml-3">Overtime Request</span>
+               </NavLink>
+            </li>
+            <li>
+               <NavLink href={route('leaverequests.index')} active={route().current('leaverequests.*')}>
+                  <svg className="flex-shrink-0 w-4 h-4 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z" />
+                  </svg>
+                  <span className="ml-3">Leave Request</span>
+               </NavLink>
+            </li>
+            <hr />
+            <li>
+               <NavLink href={route('payrolls.index')} active={route().current('payrolls.*')}>
+                  <svg className="lex-shrink-0 w-4 h-4 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                     <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z" />
+                  </svg>
+                  <span className="ml-3">Payroll</span>
                </NavLink>
             </li>
             <hr />
@@ -100,18 +117,18 @@ return (
    </aside>
 
 
-   <div className="sm:ml-64">
+   <div className={'sm:ml-64 '+ (showingNavigationDropdown ? ' ml-64' : '')}>
       <nav className="bg-white border-b border-gray-100">
          <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
                <div className="flex justify-between h-16">
                   <div className="flex">
-                     <div className="md:hidden shrink-0 flex items-center">
+                     <div className="sm:hidden shrink-0 flex items-center">
                            <button onClick={()=> setShowingNavigationDropdown((previousState) => !previousState)}
                               className="inline-flex items-center justify-center p-2 rounded-md text-gray-400
                               hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500
                               transition duration-150 ease-in-out"
                            >
-                                 <svg className="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                                 <svg className="h-4 w-4" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                                     <path className={!showingNavigationDropdown ? 'inline-flex' : 'hidden' }
                                        strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
                                        d="M4 6h16M4 12h16M4 18h16" />
@@ -175,29 +192,7 @@ return (
                </div>
          </div>
 
-         <div className={(showingNavigationDropdown ? 'block' : 'hidden' ) + ' sm:hidden' }>
-               <div className="pt-2 pb-3 space-y-1">
-                  <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
-                     Dashboard
-                  </ResponsiveNavLink>
-               </div>
-
-               <div className="pt-4 pb-1 border-t border-gray-200">
-                  <div className="px-4">
-                     <div className="font-medium text-base text-gray-800">
-                           {auth.user.name}
-                     </div>
-                     <div className="font-medium text-sm text-gray-500">{auth.user.email}</div>
-                  </div>
-
-                  <div className="mt-3 space-y-1">
-                     <ResponsiveNavLink href={route('profile.edit')}>Profile</ResponsiveNavLink>
-                     <ResponsiveNavLink method="post" href={route('logout')} as="button">
-                           Log Out
-                     </ResponsiveNavLink>
-                  </div>
-               </div>
-         </div>
+         
       </nav>
 
       {header && (

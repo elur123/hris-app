@@ -9,7 +9,7 @@ import InputLabel from '@/Components/InputLabel';
 import Select from '@/Components/Select';
 import PrimaryButton from '@/Components/PrimaryButton';
 
-import { Head, useForm } from '@inertiajs/react';
+import { Head, useForm, Link } from '@inertiajs/react';
 import { useRef } from 'react';
 
 export default function Create(props) {
@@ -45,6 +45,15 @@ export default function Create(props) {
                 <form onSubmit={updateDepartment}>
                     <CardHeader className=''>
                         <h3 className="p-4 text-gray-900">Update holiday</h3>
+                    </CardHeader>
+                    <CardHeader className='p-4 flex items-center gap-4'>
+                        <Link href={route('holidays.index')}>
+                            <svg className="text-gray-900 w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+                            </svg>
+                        </Link>
+
+                        <h3 className="text-gray-900">Update holiday</h3>
                     </CardHeader>
                     <CardBody>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">

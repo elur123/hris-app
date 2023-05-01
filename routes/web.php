@@ -13,6 +13,8 @@ use App\Http\Controllers\PositionController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\HolidayController;
 use App\Http\Controllers\OvertimeRequestController;
+use App\Http\Controllers\LeaveRequestController;
+use App\Http\Controllers\PayrollController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -95,6 +97,25 @@ Route::middleware('auth')->group(function () {
         Route::get('/{overtime}', [OvertimeRequestController::class, 'edit'])->name('edit');
         Route::put('/{overtime}', [OvertimeRequestController::class, 'update'])->name('update');
         Route::put('/checked/{overtime}', [OvertimeRequestController::class, 'checked'])->name('checked');
+    });
+
+    Route::prefix('leaverequests')->name('leaverequests.')->group(function () {
+        Route::get('/', [LeaveRequestController::class, 'index'])->name('index');
+        Route::get('/create', [LeaveRequestController::class, 'create'])->name('create');
+        Route::post('/store', [LeaveRequestController::class, 'store'])->name('store');
+        Route::get('/{leave}', [LeaveRequestController::class, 'edit'])->name('edit');
+        Route::put('/{leave}', [LeaveRequestController::class, 'update'])->name('update');
+        Route::put('/checked/{leave}', [LeaveRequestController::class, 'checked'])->name('checked');
+    });
+
+    Route::prefix('payrolls')->name('payrolls.')->group(function () {
+        Route::get('/', [PayrollController::class, 'index'])->name('index');
+        Route::get('/create', [PayrollController::class, 'create'])->name('create');
+        Route::post('/generate', [PayrollController::class, 'generate'])->name('generate');
+        Route::post('/store', [PayrollController::class, 'store'])->name('store');
+        Route::get('/{payroll}', [PayrollController::class, 'edit'])->name('edit');
+        Route::put('/{payroll}', [PayrollController::class, 'update'])->name('update');
+        Route::put('/checked/{payroll}', [PayrollController::class, 'checked'])->name('checked');
     });
     
     Route::prefix('positions')->name('positions.')->group(function () {

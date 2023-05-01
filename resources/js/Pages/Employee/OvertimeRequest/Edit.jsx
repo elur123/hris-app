@@ -11,7 +11,7 @@ import Modal from '@/Components/Modal';
 import PrimaryButton from '@/Components/PrimaryButton';
 import Button from '@/Components/Button';
 
-import { Head, useForm, router } from '@inertiajs/react';
+import { Head, useForm, router, Link } from '@inertiajs/react';
 import { useState } from 'react';
 
 export default function Create(props) {
@@ -45,7 +45,7 @@ export default function Create(props) {
     const actions = props.overtime.status_id === 1 ?
                 <>
                     <PrimaryButton disabled={processing}>Update</PrimaryButton>
-                    <Button type="button" className="bg-green-500 hover:bg-green-600" onClick={() => showApproveModal(true)}>Checked</Button>
+                    <Button type="button" className="p-2 rounded text-white bg-green-500 hover:bg-green-600" onClick={() => showApproveModal(true)}>Checked</Button>
                 </> : <h4>No actions</h4>
 
     return (
@@ -57,8 +57,14 @@ export default function Create(props) {
             <Head title="Overtime Request - Update" />
             <Card>
                 <form onSubmit={updateOvertimeRequest}>
-                    <CardHeader className=''>
-                        <h3 className="p-4 text-gray-900">Update new overtime request</h3>
+                    <CardHeader className='p-4 flex items-center gap-4'>
+                        <Link href={route('overtimerequests.index')}>
+                            <svg className="text-gray-900 w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+                            </svg>
+                        </Link>
+
+                        <h3 className="text-gray-900">Update overtime request</h3>
                     </CardHeader>
                     <CardBody>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-2">
@@ -134,8 +140,8 @@ export default function Create(props) {
             <Modal show={approveModal}>
                 <div className="p-4 border border-bottom flex justify-between items-center">
                     <h1 className="text-2xl">Approved Overtime Request</h1>
-                    <Button type="button" className="bg-gray-500 hover:bg-gray-600" onClick={() => showApproveModal(false)}>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+                    <Button type="button" className="bg-gray-500 text-white rounded hover:bg-gray-600" onClick={() => showApproveModal(false)}>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                         </svg>
                     </Button>
@@ -155,8 +161,8 @@ export default function Create(props) {
                         </div>
                 </div>
                 <div className="p-4 flex justify-between items-center">
-                    <Button type="button" className="bg-green-500 hover:bg-green-600" onClick={() => checkedOverTime('Approved')}>Approved</Button>
-                    <Button type="button" className="bg-red-500 hover:bg-red-600" onClick={() => checkedOverTime('Disapproved')}>Disapproved</Button>
+                    <Button type="button" className="p-2 rounded text-white bg-green-500 hover:bg-green-600" onClick={() => checkedOverTime('Approved')}>Approved</Button>
+                    <Button type="button" className="p-2 rounded text-white bg-red-500 hover:bg-red-600" onClick={() => checkedOverTime('Disapproved')}>Disapproved</Button>
                 </div>
             </Modal>
         </AuthenticatedLayout>

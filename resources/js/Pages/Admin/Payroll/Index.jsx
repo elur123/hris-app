@@ -6,41 +6,42 @@ import ButtonLink from '@/Components/ButtonLink'
 import DataTable from '@/Components/DataTable';
 import { Head } from '@inertiajs/react';
 
-export default function Branch(props) {
-    const columns = ['Branch name', 'Address', 'Contact #', 'Num. Departments', 'Created At', 'Updated At', 'Actions'];
+export default function Payrolls(props) {
+    const columns = ['Cut off', 'Branch', 'Total', 'Status', 'Prepared by', 'Checked by', 'Actions'];
     const mapping = {
-        name: 'Branch name',
-        address: 'Address',
-        contact_no: 'Contact #',
-        departments_count: 'Num. Departments',
-        created_at: 'Created At',
-        updated_at: 'Updated At',
+        cut_off: 'Cut off',
+        branch: 'Branch',
+        total_pay: 'Total',
+        status: 'Status',
+        admin_prepared: 'Prepared by',
+        admin_checked: 'Checked by',
         action: 'Actions'
-    };
+    }
+
     return (
         <AuthenticatedLayout
             auth={props.auth}
             errors={props.errors}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Branch</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Payroll</h2>}
         >
-            <Head title="Branch" />
+            <Head title="Payroll" />
 
             <Card>
                 <CardHeader className='p-4 flex justify-between items-center'>
-                    <h3 className="text-gray-900">Branch List</h3>
-                    <ButtonLink href={route('branches.create')} className='bg-green-500 hover:text-white hover:bg-green-400'>
+                    <h3 className="text-gray-900">Payroll List</h3>
+                    <ButtonLink href={route('payrolls.create')} className='bg-green-500 hover:text-white hover:bg-green-400'>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-4">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                         </svg>
-                        New Branch
+                        New Payroll
                     </ButtonLink>
                 </CardHeader>
                 <CardBody>
                     <div className="relative overflow-x-auto sm:rounded-lg">
-                        <DataTable
+                        <DataTable 
                             columns={columns}
-                            data={props.branches}
                             mapping={mapping}
+                            data={props.payrolls}
                         />
                     </div>
                 </CardBody>

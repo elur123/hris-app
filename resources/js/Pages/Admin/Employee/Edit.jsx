@@ -13,8 +13,7 @@ import TableHead from '@/Components/TableHead'
 import TableBody from '@/Components/TableBody'
 import PrimaryButton from '@/Components/PrimaryButton';
 
-import { Head } from '@inertiajs/react';
-import { useForm, router } from '@inertiajs/react';
+import { Head, Link, useForm, router } from '@inertiajs/react';
 import { useRef, useState, useEffect } from 'react';
 
 export default function Update(props) {
@@ -271,8 +270,14 @@ export default function Update(props) {
 
             <Card>
                 <form onSubmit={updateEmployee}>
-                    <CardHeader className=''>
-                        <h3 className="p-4 font-bold text-gray-900">Update new employee</h3>
+                    <CardHeader className='p-4 flex items-center gap-4'>
+                        <Link href={route('employees.index')}>
+                            <svg className="text-gray-900 w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+                            </svg>
+                        </Link>
+
+                        <h3 className="text-gray-900">Update employee</h3>
                     </CardHeader>
                     <CardBody>
                         <div id="personal-information">
