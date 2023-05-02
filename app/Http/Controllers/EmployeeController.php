@@ -33,6 +33,7 @@ class EmployeeController extends Controller
 
             return [
                 'id' => $employee->id,
+                'employee_key' => $employee->employee_key,
                 'profile_picture' => str_replace('public', 'storage', $employee->user->profile_picture),
                 'fullname' => $employee->user->name,
                 'email' => $employee->user->email,

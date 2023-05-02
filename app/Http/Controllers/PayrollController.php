@@ -52,13 +52,34 @@ class PayrollController extends Controller
 
     public function generate(Request $request)
     {
+        // Get Attendance data and groupby employee.
         $data = Attendance::query()
-        ->with('employee.user')
+        ->with('employee.user', 'employee.department', 'branch')
         ->where('branch_id', $request->branch)
-        ->whereDate('start_at', '<=', $request->from)
-        ->whereDate('end_at', '>=', $request->to)
-        ->get();
-
-        dd($data);
+        ->whereDate('start_at', '>=', $request->from)
+        ->whereDate('end_at', '<=', $request->to)
+        ->get()
+        ->map(fn($attendance, $key) => [
+            'employee_id' =>  $attendance['employee_id'],
+            'employee' => $attendance['employee']['user']['name'],
+            'department' => $attendance['employee']['department']['name'],
+            'working_hours' => get_date_time_difference($attendance['start_at'], $attendance['end_at'])
+        ])
+        ->groupBy('employee')
+        ->values()
+        ->all();
+        
+        // Sum all the working hours
+        $new_data = collect($data)
+        ->map(fn($d, $key) => [
+            'employee_id' => $d[0]['employee_id'],
+            'employee' => $d[0]['employee'],
+            'department' => $d[0]['department'],
+            'working_hours' => sum_working_hours($d),
+            'overtime_hours' => get_overtime_hours($d[0]['employee_id'], $request->from, $request->to),
+            'leave_days' => get_leave_hours($d[0]['employee_id'], $request->from, $request->to)
+        ]);
+        
+        return json_encode($new_data);
     }
 }

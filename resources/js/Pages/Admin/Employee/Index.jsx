@@ -10,8 +10,9 @@ import DataTable from '@/Components/DataTable';
 import { Head } from '@inertiajs/react';
 
 export default function Employee(props) {
-    const columns = ['Employee name', 'Email', 'Phone #', 'Branch', 'Department', 'Position', 'Created At', 'Updated At', 'Actions'];
+    const columns = ['KEY', 'Employee name', 'Email', 'Phone #', 'Branch', 'Department', 'Position', 'Created At', 'Updated At', 'Actions'];
     const mapping = {
+        employee_key: 'KEY',
         fullname: 'Employee name',
         email: 'Email',
         contact_no: 'Phone #',
