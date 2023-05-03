@@ -17,11 +17,14 @@ return new class extends Migration
             $table->id();
             $table->integer('payroll_id');
             $table->integer('employee_id');
+            $table->double('hours_rate', 5, 2);
             $table->double('total_days', 5, 2);
             $table->double('total_hours', 5, 2);
-            $table->double('total_absent', 5, 2);
+            $table->double('total_absent', 5, 2)->default(0)->nullable();
+            $table->double('overtime_hours', 5, 2)->default(0)->nullable();
+            $table->double('leave_days', 5, 2)->default(0)->nullable();
             $table->double('sub_total', 10, 2);
-            $table->double('total_deductions', 10, 2);
+            $table->double('total_deductions', 10, 2)->default(0)->nullable();
             $table->double('total', 10, 2);
         });
     }

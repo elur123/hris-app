@@ -86,33 +86,35 @@ export default function Edit(props) {
                         <h3 className="text-gray-900">Update branch</h3>
                     </CardHeader>
                     <CardBody>
-                        <div className='mb-2'>
-                            <InputLabel htmlFor="name" value="Branch name" />
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-2">
+                            <div className=''>
+                                <InputLabel htmlFor="name" value="Branch name" />
 
-                            <TextInput
-                                id="name"
-                                value={data.name}
-                                onChange={(e) => setData('name', e.target.value)}
-                                type="text"
-                                className="mt-1 block w-full"
-                                autoComplete="name"
-                            />
+                                <TextInput
+                                    id="name"
+                                    value={data.name}
+                                    onChange={(e) => setData('name', e.target.value)}
+                                    type="text"
+                                    className="mt-1 block w-full"
+                                    autoComplete="name"
+                                />
 
-                            <InputError message={errors.name} className="mt-2" />
-                        </div>
-                        <div className='my-4'>
-                            <InputLabel htmlFor="contact_no" value="Contact No." />
+                                <InputError message={errors.name} className="mt-2" />
+                            </div>
+                            <div className=''>
+                                <InputLabel htmlFor="contact_no" value="Contact No." />
 
-                            <TextInput
-                                id="contact_no"
-                                value={data.contact_no}
-                                onChange={(e) => setData('contact_no', e.target.value)}
-                                type="text"
-                                className="mt-1 block w-full"
-                                autoComplete="contact_no"
-                            />
+                                <TextInput
+                                    id="contact_no"
+                                    value={data.contact_no}
+                                    onChange={(e) => setData('contact_no', e.target.value)}
+                                    type="text"
+                                    className="mt-1 block w-full"
+                                    autoComplete="contact_no"
+                                />
 
-                            <InputError message={errors.contact_no} className="mt-2" />
+                                <InputError message={errors.contact_no} className="mt-2" />
+                            </div>
                         </div>
 
                         <div className='my-4'>

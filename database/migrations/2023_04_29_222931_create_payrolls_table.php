@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('branch_id');
             $table->integer('status_id');
             $table->integer('prepared_by');
-            $table->integer('checked_by');
+            $table->integer('checked_by')->nullable();
             $table->timestamps();
         });
     }

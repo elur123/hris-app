@@ -7,10 +7,10 @@ import DataTable from '@/Components/DataTable';
 import { Head } from '@inertiajs/react';
 
 export default function Payrolls(props) {
-    const columns = ['Cut off', 'Branch', 'Total', 'Status', 'Prepared by', 'Checked by', 'Actions'];
+    const columns = ['Branch', 'Cut off', 'Total', 'Status', 'Prepared by', 'Checked by', 'Actions'];
     const mapping = {
-        cut_off: 'Cut off',
         branch: 'Branch',
+        cut_off: 'Cut off',
         total_pay: 'Total',
         status: 'Status',
         admin_prepared: 'Prepared by',

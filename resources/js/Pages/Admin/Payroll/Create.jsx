@@ -21,17 +21,12 @@ export default function Create(props) {
         branch: 1,
         from: '',
         to: '',
-        list: [],
     });
-
-    const generate = () => {
-        router.post(route('payrolls.generate'), data)
-    }
 
     const createPayroll = (e) => {
         e.preventDefault();
 
-        post(route('payrolls.store'), {
+        post(route('payrolls.generate'), {
             preserveScroll: true,
             onSuccess: () => reset(),
             onError: () => {},
@@ -47,9 +42,8 @@ export default function Create(props) {
             <Head title="Payroll - Create" />
 
             <Card>
-                <form onSubmit={createPayroll}>
-                    <CardHeader className='p-4 flex items-center gap-4'>
-                        <Link href={route('positions.index')}>
+            <CardHeader className='p-4 flex items-center gap-4'>
+                        <Link href={route('payrolls.index')}>
                             <svg className="text-gray-900 w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
                             </svg>
@@ -70,7 +64,7 @@ export default function Create(props) {
                                     onSelect={(e) => setData('branch', e.id)}
                                 />
 
-                                <InputError message={errors.label} className="mt-2" />
+                                <InputError message={errors.branch} className="mt-2" />
                             </div>
                             <div>
                                 <InputLabel htmlFor="from" value="From" />
@@ -84,7 +78,7 @@ export default function Create(props) {
                                     onChange={(e) => setData('from', e.target.value)}
                                 />
 
-                                <InputError message={errors.label} className="mt-2" />
+                                <InputError message={errors.from} className="mt-2" />
                             </div>
                             <div>
                                 <InputLabel htmlFor="to" value="To" />
@@ -98,19 +92,15 @@ export default function Create(props) {
                                     onChange={(e) => setData('to', e.target.value)}
                                 />
 
-                                <InputError message={errors.label} className="mt-2" />
+                                <InputError message={errors.to} className="mt-2" />
                             </div>
                             <div>
                                 <InputLabel htmlFor="address" value="Action" />
 
-                                <PrimaryButton onClick={generate} type="button" className="w-full py-2 px-3 justify-center mt-1">Generate</PrimaryButton>
+                                <PrimaryButton onClick={createPayroll} type="button" className="w-full py-2 px-3 justify-center mt-1">Generate</PrimaryButton>
                             </div>
                         </div>
                     </CardBody>
-                    <CardFooter>
-                        <PrimaryButton disabled={processing}>Create</PrimaryButton>
-                    </CardFooter>
-                </form>
             </Card>
         </AuthenticatedLayout>
     );

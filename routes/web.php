@@ -112,8 +112,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [PayrollController::class, 'index'])->name('index');
         Route::get('/create', [PayrollController::class, 'create'])->name('create');
         Route::post('/generate', [PayrollController::class, 'generate'])->name('generate');
-        Route::post('/store', [PayrollController::class, 'store'])->name('store');
-        Route::get('/{payroll}', [PayrollController::class, 'edit'])->name('edit');
+        Route::get('/{payroll}', [PayrollController::class, 'check'])->name('edit');
         Route::put('/{payroll}', [PayrollController::class, 'update'])->name('update');
         Route::put('/checked/{payroll}', [PayrollController::class, 'checked'])->name('checked');
     });

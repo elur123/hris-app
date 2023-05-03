@@ -88,37 +88,38 @@ export default function Create(props) {
                         <h3 className="text-gray-900">Create new branch</h3>
                     </CardHeader>
                     <CardBody>
-                        <div className='mb-2'>
-                            <InputLabel htmlFor="name" value="Branch name" />
+                        <div className="grid grid-cols-1 md:grid-cols-2 mb-2 gap-4">
+                            <div className=''>
+                                <InputLabel htmlFor="name" value="Branch name" />
 
-                            <TextInput
-                                id="name"
-                                ref={name}
-                                value={data.name}
-                                onChange={(e) => setData('name', e.target.value)}
-                                type="text"
-                                className="mt-1 block w-full"
-                                autoComplete="name"
-                            />
+                                <TextInput
+                                    id="name"
+                                    ref={name}
+                                    value={data.name}
+                                    onChange={(e) => setData('name', e.target.value)}
+                                    type="text"
+                                    className="mt-1 block w-full"
+                                    autoComplete="name"
+                                />
 
-                            <InputError message={errors.name} className="mt-2" />
-                        </div>
-                        <div className='my-4'>
-                            <InputLabel htmlFor="contact_no" value="Contact No." />
+                                <InputError message={errors.name} className="mt-2" />
+                            </div>
+                            <div className=''>
+                                <InputLabel htmlFor="contact_no" value="Contact No." />
 
-                            <TextInput
-                                id="contact_no"
-                                ref={contact_no}
-                                value={data.contact_no}
-                                onChange={(e) => setData('contact_no', e.target.value)}
-                                type="text"
-                                className="mt-1 block w-full"
-                                autoComplete="contact_no"
-                            />
+                                <TextInput
+                                    id="contact_no"
+                                    ref={contact_no}
+                                    value={data.contact_no}
+                                    onChange={(e) => setData('contact_no', e.target.value)}
+                                    type="text"
+                                    className="mt-1 block w-full"
+                                    autoComplete="contact_no"
+                                />
 
-                            <InputError message={errors.contact_no} className="mt-2" />
-                        </div>
-
+                                <InputError message={errors.contact_no} className="mt-2" />
+                            </div>
+                        </div>  
                         <div className='my-4'>
                             <InputLabel htmlFor="address" value="Address" />
 

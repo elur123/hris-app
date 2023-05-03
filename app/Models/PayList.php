@@ -12,13 +12,18 @@ class PayList extends Model
     protected $fillable = [
         'payroll_id',
         'employee_id',
+        'hours_rate',
         'total_days',
         'total_hours',
         'total_absent',
+        'overtime_hours',
+        'leave_days',
         'sub_total',
         'total_deductions',
         'total',
     ];
+
+    public $timestamps = false;
 
     /**
     * Relationship functions 

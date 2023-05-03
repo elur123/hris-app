@@ -12,4 +12,8 @@ class RateType extends Model
     protected $fillable = [ 'label' ];
 
     public $timestamps = false;
+
+    public const IS_DAILY = 1;
+    public const IS_WEEKLY = 2;
+    public const IS_MONTHLY = 1;
 }

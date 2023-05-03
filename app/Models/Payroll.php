@@ -19,6 +19,11 @@ class Payroll extends Model
         'checked_by',
     ];
 
+    protected $casts = [
+        'from' => 'datetime:F j, Y',
+        'to' => 'datetime:F j, Y',
+    ];
+
     /*
     * Relationship funcions
     */
