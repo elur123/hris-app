@@ -15,6 +15,7 @@ use App\Http\Controllers\HolidayController;
 use App\Http\Controllers\OvertimeRequestController;
 use App\Http\Controllers\LeaveRequestController;
 use App\Http\Controllers\PayrollController;
+use App\Http\Controllers\LandingPageController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,14 +35,7 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
         'date' => date('D, j F Y')
     ]);
-    // return Inertia::render('Auth/Login', [
-    //     'canResetPassword' => true
-    // ]);
 });
-
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::prefix('clock')->name('clock.')->group(function () {
     Route::get('/', [ClockController::class, 'index'])->name('index');
@@ -49,6 +43,8 @@ Route::prefix('clock')->name('clock.')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', [LandingPageController::class, 'index'])->name('dashboard');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -113,7 +109,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/create', [PayrollController::class, 'create'])->name('create');
         Route::post('/generate', [PayrollController::class, 'generate'])->name('generate');
         Route::get('/{payroll}', [PayrollController::class, 'check'])->name('edit');
-        Route::put('/{payroll}', [PayrollController::class, 'update'])->name('update');
+        Route::put('/{paylist}', [PayrollController::class, 'update'])->name('update');
         Route::put('/checked/{payroll}', [PayrollController::class, 'checked'])->name('checked');
     });
     

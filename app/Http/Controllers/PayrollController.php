@@ -10,6 +10,7 @@ use Inertia\Inertia;
 use Inertia\Response;
 
 use App\Models\Payroll;
+use App\Models\PayList;
 use App\Models\Branch;
 use App\Models\Attendance;
 use App\Models\RateType;
@@ -137,5 +138,43 @@ class PayrollController extends Controller
         return Inertia::render('Admin/Payroll/Check', [
             'payroll' => $payroll
         ]);
+    }
+
+    public function update(Request $request, PayList $paylist)
+    {
+        $payroll = $paylist->payroll;
+
+        $sub_total = doubleval($request->hours_rate) * doubleval($request->total_hours);
+        $total = doubleval($sub_total) + (doubleval($request->overtime_hours) * doubleval($request->hours_rate)) + 
+        ((doubleval($request->leave_days) * 8) * doubleval($request->hours_rate));
+
+        $paylist->update([
+            'hours_rate' => $request->hours_rate,
+            'total_days' => doubleval($request->total_hours) / 8,
+            'total_hours' => $request->total_hours,
+            'overtime_hours' => $request->overtime_hours,
+            'leave_days' => $request->leave_days,
+            'sub_total' => $sub_total,
+            'total' => $total
+        ]);
+        
+        // Sum all total in pay list
+        $payrollTotal = $payroll->list->pluck('total')->sum();
+
+        $payroll->update([
+            'total_pay' => $payrollTotal
+        ]);
+
+        return Redirect::back();
+    }
+
+    public function checked(Request $request, Payroll $payroll)
+    {
+        $payroll->update([
+            'status_id' => $request->status,
+            'checked_by' => auth()->user()->id
+        ]);
+
+        return Redirect::route('payrolls.index'); 
     }
 }

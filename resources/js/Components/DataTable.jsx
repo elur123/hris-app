@@ -51,7 +51,7 @@ const DataTable = ({ columns, data, itemsPerPage = 10, mapping, emptyText = 'No 
       </div>
       {/* Render table header */}
       <table className={'w-full text-sm text-left text-gray-500 dark:text-gray-400 '}>
-        <thead className={'text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 '}>
+        <thead className={'text-xs text-gray-700 uppercase bg-cyan-900'}>
           <tr>
             {columns.map(column => (
               <th scope="col" className="px-4 py-3 border text-white" key={column}>{column}</th>
