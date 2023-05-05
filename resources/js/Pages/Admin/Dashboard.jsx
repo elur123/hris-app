@@ -1,8 +1,31 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 import CardWidget from '@/Components/CardWidget';
+import ButtonLink from '@/Components/ButtonLink';
+
 export default function AdminDashboard(props) {
-    console.log(props.data);
+
+    console.log(props.data.attendance_log);
+    
+    const attendance_log = props.data.attendance_log === null 
+    ? <div className="p-4 grid grid-cols-1">
+        <CardWidget className="bg-green-400">
+            <p className="mb-2 text-xl font-bold">You don't sign in today.</p>
+            <ButtonLink href={route('clock.index')} className='bg-green-600 hover:text-white hover:bg-green-500'>
+                Sign in
+            </ButtonLink>
+        </CardWidget>
+     </div>
+    : <div className="p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+        <CardWidget className="bg-green-400">
+            <p className="mb-2 text-3xl font-bold">{props.data.attendance_log.sign_in}</p>
+            <p className="text-xl font-bold">Sign in</p>
+        </CardWidget>
+        <CardWidget className="bg-yellow-400">
+            <p className="mb-2 text-3xl font-bold">{props.data.attendance_log.sign_out ?? 'Not yet sign out'}</p>
+            <p className="text-xl font-bold">Sign out</p>
+        </CardWidget>
+    </div>
 
     return (
         <AuthenticatedLayout
@@ -12,7 +35,7 @@ export default function AdminDashboard(props) {
         >
             <Head title="Dashboard" />
 
-            <div className="py-12">
+            <div className="py-12 mb-2">
                 <div className="max-w-8xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-4 grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -44,6 +67,16 @@ export default function AdminDashboard(props) {
                                 <p className="mb-2 text-3xl font-bold">{props.data.payroll_count}</p>
                                 <p className="text-xl font-bold">Total Payroll</p>
                             </CardWidget>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="mb-4">
+                <div className="max-w-8xl mx-auto sm:px-6 lg:px-8">
+                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                        <h5 className="px-4 pt-3 text-2xl font-bold text-gray-900">Your attendance today</h5>
+                        <div className="max-w-6xl mx-auto">
+                            {attendance_log}
                         </div>
                     </div>
                 </div>

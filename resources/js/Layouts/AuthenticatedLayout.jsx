@@ -12,8 +12,8 @@ return (
 <div className="w-full min-h-screen bg-gray-100">
 
    <aside id="logo-sidebar" className={'fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0' + (showingNavigationDropdown ? ' translate-x-0' : ' -translate-x-full')} aria-label="Sidebar">
-      <div className="h-full px-3 py-4 overflow-y-auto bg-cyan-900">
-            <Link href="/" className="flex flex-wrap justify-center content-center gap-2">
+      <div className="h-full px-3 py-2 overflow-y-auto bg-cyan-900">
+            <Link href="/" className="flex flex-wrap justify-center content-center gap-1">
                   <ApplicationLogo className="block h-5 w-auto fill-current text-white" />
                   <p className="text-white text-xl">HRIS</p>
             </Link>
@@ -75,10 +75,10 @@ return (
             </li>
             <hr />
             <li>
-               <a href="#" className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+               <NavLink href={route('users.index')}  active={route().current('users.*')}>
                   <svg aria-hidden="true" className="flex-shrink-0 w-4 h-4 text-white transition duration-75 group-hover:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd"></path></svg>
                   <span className="flex-1 ml-3 whitespace-nowrap">Users</span>
-               </a>
+               </NavLink>
             </li>
             <li>
                <NavLink href={route('departments.index')} active={route().current('departments.*')}>
