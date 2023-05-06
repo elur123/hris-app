@@ -116,7 +116,6 @@ return (
       </div>
    </aside>
 
-
    <div className={'sm:ml-64 '+ (showingNavigationDropdown ? ' ml-64' : '')}>
       <nav className="bg-white border-b border-gray-100">
          <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">

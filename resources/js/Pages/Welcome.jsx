@@ -32,7 +32,7 @@ return (
 
     <Head title="Welcome" />
     <div className="border border-bottom">
-        <div className="container mx-auto py-2 flex justify-between items-center">
+        <div className="container mx-auto px-2 py-2 flex justify-between items-center md:px-0">
             <div className="flex gap-6 items-center">
                 <div className="flex gap-2 items-center">
                     <svg viewBox="0 0 62 65" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-5 w-5">
@@ -43,17 +43,22 @@ return (
                     <span className="font-extrabold text-xl text-cyan-800">Humanage</span>
                 </div>
             </div>
-            <div className="">
+            <Button className="visible md:invisible">
+                <svg className="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5" />
+                </svg>
+            </Button>
+            <div className="hidden md:block">
                 <Link href={route('login')} className="p-2 font-extrabold text-cyan-800">Login</Link>
                 <Link href={route('register')}
                     className="p-2 font-extrabold text-cyan-800 border border-cyan-800 rounded-lg">Start for free</Link>
             </div>
         </div>
     </div>
-    <section className="container mx-auto my-8 py-10">
-        <div className="grid grid-cols-2 gap-6 items-center">
+    <section className="container mx-auto px-2 my-4 py-4 md:py-10 md:px-0 md:my-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
             <div className="py-1">
-                <h1 className="py-3 text-6xl text-cyan-800 font-extrabold leading-tight">Maximizing Your Workforce
+                <h1 className="py-3 text-4xl md:text-6xl text-cyan-800 font-extrabold leading-tight">Maximizing Your Workforce
                     Potential</h1>
                 <p className="py-3 text-gray-400 leading-relaxed">Humanage is a people management solution that helps in
                     employee onboarding, performance tracking,
@@ -62,16 +67,16 @@ return (
                 <div className="my-3">
                     <div className="flex gap-3">
                         <Link href={route('login')}
-                            className="px-4 py-2 font-extrabold bg-green-500 text-white rounded-lg">Start for free
+                            className="px-2 py-2 font-extrabold bg-green-500 text-white md:px-4 rounded-lg">Start for free
                         </Link>
                         <Link href={route('register')}
-                            className="px-4 py-2 font-extrabold text-cyan-800 border border-cyan-800 rounded-lg">Meet an
+                            className="px-2 py-2 font-extrabold text-cyan-800 border border-cyan-800 md:px-4 rounded-lg">Meet an
                         Expert</Link>
                     </div>
                     <p className="py-3 text-gray-400">Setup in 5 minutes. No credit card required.</p>
                 </div>
                 <div className="my-5">
-                    <div className="flex items-center gap-7">
+                    <div className="flex flex-wrap items-center gap-7">
                         <div className="flex items-center gap-2">
                             <div className="p-3 bg-gray-100 rounded-full">
                                 <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -186,7 +191,7 @@ return (
             <div className="w-full h-full overflow-hidden relative rounded-2xl">
                 <div className="w-full h-full absolute z-0 top-0 text-white bg-cyan-900 opacity-95 rounded-2xl"></div>
                 <div className="w-full h-full relative z-10 p-5">
-                    <div className="grid grid-cols-2 gap-3 mb-3">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
                         <div className="p-4 bg-white shadow rounded" id="dev-card">
                             <div className="w-[80px] h-[80px] overflow-hidden bg-cyan-900 rounded-full mx-auto p-1">
                                 <img className="w-full h-[80px]" src="/img/dev_profile.png" alt="Ruel Israe" />
@@ -226,8 +231,8 @@ return (
                     </div>
                     <div className="grid grid-cols-1 gap-3">
                         <div className="p-4 bg-white shadow rounded">
-                            <div className="flex gap-2">
-                                <div className="pr-6 border-r-2">
+                            <div className="flex flex-wrap gap-2">
+                                <div className="pr-6 md:border-r-2">
                                     <p className="my-2  text-gray-400">Payroll Summary</p>
                                     <h4 className="my-2 text-4xl font-bold text-cyan-900">$32,000</h4>
                                     <Button
@@ -273,24 +278,24 @@ return (
             </div>
         </div>
     </section>
-    <div className="container mx-auto my-8 py-10">
-        <h3 className="w-1/2 mx-auto py-3 text-center text-cyan-800 text-2xl font-bold">Join over 1,000+ companies
+    <div className="container mx-auto px-2 my-4 py-4 md:py-10 md:px-0 md:my-8">
+        <h3 className="w-full md:w-1/2 mx-auto py-3 text-center text-cyan-800 text-2xl font-bold">Join over 1,000+ companies
             around the world that trust the Humanage Platfor.</h3>
-        <div className="my-8 py-3 flex justify-between items-center">
+        <div className="my-8 py-3 flex flex-wrap justify-center md:justify-between items-center">
             <h4 className="text-3xl text-gray-400 font-bold">Company One</h4>
             <h4 className="text-3xl text-gray-400 font-bold">Company Two</h4>
             <h4 className="text-3xl text-gray-400 font-bold">Company Three</h4>
             <h4 className="text-3xl text-gray-400 font-bold">Company Four</h4>
         </div>
     </div>
-    <section className="container mx-auto my-8 py-10 bg-gray-100 rounded-3xl">
-        <h1 className="w-1/2 mx-auto py-3 text-center text-5xl text-cyan-800 font-extrabold leading-tight">Traditional
+    <section className="container mx-auto px-2 my-4 py-4 md:py-10 md:px-0 md:my-8 bg-gray-100 rounded-3xl">
+        <h1 className="w-full md:w-1/2 mx-auto py-3 text-center text-4xl  md:text-6xl text-cyan-800 font-extrabold leading-tight">Traditional
             HR Software Is Outdated. Why Humanage?</h1>
-        <p className="w-1/2 mx-auto py-3 text-center text-xl text-gray-500 leading-relaxed">Humanage helps your teams to
+        <p className="w-full md:w-1/2 mx-auto py-3 text-center text-xl text-gray-500 leading-relaxed">Humanage helps your teams to
             your organization, empowers your employees with self-service tools,
             and allow them to connect with each other in a personal way.
         </p>
-        <div className="w-full mt-8 p-5 flex gap-5">
+        <div className="w-full mt-8 p-2 md:p-4 flex flex-wrap md:flex-nowrap gap-2 md:gap-4">
             <div className="p-3 w-full h-[360px] group overflow-hidden flex flex-col justify-between bg-white rounded-xl hover:bg-cyan-900 hover:gap-2"
                 id="card">
                 <div id="icon" className="w-10 p-1 bg-gray-100 rounded-xl group-hover:bg-green-300">
@@ -374,12 +379,12 @@ return (
             </div>
         </div>
     </section>
-    <section className="container mx-auto my-8 py-10">
+    <section className="container mx-auto px-2 my-4 py-4 md:py-10 md:px-0 md:my-8">
         <div className="my-3">
-            <h1 className="w-1/2 mx-auto py-3 text-center text-5xl text-cyan-800 font-extrabold leading-tight">Empower
+            <h1 className="w-full md:w-1/2 mx-auto py-3 text-center text-4xl md:text-6xl text-cyan-800 font-extrabold leading-tight">Empower
                 Employees and Automate HR Processes</h1>
         </div>
-        <div className="w-full my-3 grid grid-cols-2 gap-5">
+        <div className="w-full my-3 grid grid-cols-1 md:grid-cols-2 gap-5">
             <div className="bg-purple-300 p-5 rounded-lg">
                 <div className="p-3 mb-4 bg-cyan-900 flex justify-between items-center rounded-lg">
                     <svg viewBox="0 0 62 65" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -389,8 +394,8 @@ return (
                             fill="#22c55e" />
                     </svg>
                     <div id="left" className="flex items-center gap-3">
-                        <span className="w-[120px] h-3 mx-1.5 bg-cyan-800 rounded"></span>
-                        <span className="w-[80px] h-3 mx-1.5 bg-cyan-800 rounded"></span>
+                        <span className="w-[80] md:w-[120px] h-3 mx-1.5 bg-cyan-800 rounded"></span>
+                        <span className="w-[60] md:w-[80px] h-3 mx-1.5 bg-cyan-800 rounded"></span>
                         <svg className="w-5 h-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round"
@@ -449,7 +454,7 @@ return (
                 </div>
             </div>
             <div className="p-3">
-                <h3 className="py-3 text-3xl text-cyan-800 font-extrabold leading-tight">Create a Great Experience
+                <h3 className="py-3 text-4xl md:text-6xl text-cyan-800 font-extrabold leading-tight">Create a Great Experience
                     Before and After Joining</h3>
                 <p className="py-3 text-gray-400">
                     Make a great first impression by configuring and scheduling everything that needs to happen for all
@@ -476,19 +481,19 @@ return (
             </div>
         </div>
     </section>
-    <div className="container mx-auto my-8 py-10 bg-cyan-900 rounded-3xl text-center">
-        <h1 className="w-1/2 mx-auto py-3 text-white text-5xl font-bold">Get Started for free forever</h1>
-        <p className="w-1/2 mx-auto py-3 text-gray-400 leading-relaxed">Humanage puts all your budget worries behind.
+    <div className="container mx-auto px-2 my-4 py-4 md:py-10 md:px-0 md:my-8 bg-cyan-900 md:rounded-3xl text-center">
+        <h1 className="w-full md:w-1/2 mx-auto py-3 text-white text-4xl md:text-6xl font-bold">Get Started for free forever</h1>
+        <p className="w-full md:w-1/2 mx-auto py-3 text-gray-400 leading-relaxed">Humanage puts all your budget worries behind.
             Start operating HR effortlessly for free, forever and get advanced capabilities as you scale</p>
         <div className="my-3 flex justify-center items-center gap-4">
-            <Link href={route('login')} className="px-4 py-2 font-extrabold bg-green-500 text-white rounded-lg">Start
+            <Link href={route('login')} className="px-2 md:px-4 py-2 font-extrabold bg-green-500 text-white rounded-lg">Start
             for free</Link>
             <Link href={route('register')}
-                className="px-4 py-2 font-extrabold bg-white text-cyan-800 border border-cyan-800 rounded-lg">Meet an
+                className="px-2 md:px-4 py-2 font-extrabold bg-white text-cyan-800 border border-cyan-800 rounded-lg">Meet an
             Expert</Link>
         </div>
     </div>
-    <footer className="container mx-auto my-8 pt-10">
+    <footer className="container mx-auto px-2 my-4 py-4 md:my-8 md:px-0 md:pb-0 md:pt-8">
         <div className="py-3 flex justify-between border-b-2 items-center">
             <div className="flex gap-2 items-center">
                 <svg viewBox="0 0 62 65" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-5 w-5">
@@ -524,7 +529,7 @@ return (
 
             </div>
         </div>
-        <div className="my-3 flex justify-between">
+        <div className="my-3 flex flex-wrap md:flex-nowrap justify-between">
             <nav>
                 <h4 className="py-3 text-xl text-gray-400 font-bold">Products</h4>
                 <ul>
