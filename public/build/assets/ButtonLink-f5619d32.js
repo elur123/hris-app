@@ -1,0 +1,1 @@
+import{a as n,d as a}from"./app-6971d528.js";function o({className:e="",children:r,...t}){return n(a,{...t,className:"inline-flex items-center px-2 py-1 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest "+e,children:r})}export{o as B};

@@ -1,1 +1,0 @@
-import{a as e}from"./app-359c51dc.js";function s({className:n="",disabled:t,children:o,...a}){return e("button",{...a,className:`text-center uppercase transition ease-in-out duration-150 ${t&&"opacity-25"} `+n,disabled:t,children:o})}export{s as B};
