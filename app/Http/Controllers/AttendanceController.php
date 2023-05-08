@@ -13,8 +13,29 @@ class AttendanceController extends Controller
 {
     public function index(): Response
     {
-        return Inertia::render('Admin/Attendance/Index', [
-            'attendances' => Attendance::query()
+        $user = auth()->user();
+
+        $attendances = Attendance::query()
+        ->where('employee_id', $user->employee->id)
+        ->with('employee', 'branch')
+        ->get()
+        ->map(function($attendance) {
+            
+            return [
+                'id' => $attendance->id,
+                'fullname' => $attendance->employee->user->name,
+                'branch' => $attendance->branch->name,
+                'start_at' => date("F j, Y, g:i a", strtotime($attendance->start_at)),
+                'end_at' => $attendance->end_at !== null ? date("F j, Y, g:i a", strtotime($attendance->end_at)) : 'No timeout',
+                'actions' => [
+                    'edit' => route('attendances.edit', $attendance)
+                ]
+            ];
+        });
+
+        if ($user->isAdmin()) 
+        {
+            $attendances = Attendance::query()
             ->whereDate('start_at', date('Y-m-d'))
             ->with('employee', 'branch')
             ->get()
@@ -30,7 +51,11 @@ class AttendanceController extends Controller
                         'edit' => route('attendances.edit', $attendance)
                     ]
                 ];
-            })
+            });
+        }
+
+        return Inertia::render('Admin/Attendance/Index', [
+            'attendances' => $attendances
         ]);
     }
 

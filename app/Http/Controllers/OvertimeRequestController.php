@@ -16,26 +16,36 @@ class OvertimeRequestController extends Controller
 
     public function index(): Response
     {
+        $user = auth()->user();
+
+        $overtime_requests = OvertimeRequest::query()
+        ->with('employee', 'adminChecked')
+        ->get()
+        ->map(function ($overtime){
+            
+            return [
+                'id' => $overtime->id,
+                'employee_id' => $overtime->employee_id,
+                'employee' => $overtime->employee->full_name,
+                'overtime_at' => date("F j, Y", strtotime($overtime->overtime_at)),
+                'time_rage' => date("g:i a", strtotime($overtime->from)).' to '. date("g:i a", strtotime($overtime->to)),
+                'status_id' => $overtime->status_id,
+                'status' => $overtime->status->label,
+                'checked_by' => $overtime->checked_by,
+                'admin_checked' => $overtime->adminChecked->name ?? 'Not yet check',
+                'actions' => [
+                    'edit' => route('overtimerequests.edit', $overtime)
+                ]
+            ];
+        });
+
+        if ($user->isEmployee()) 
+        {
+            $overtime_requests = collect($overtime_requests)->where('employee_id', $user->employee->id)->values();
+        }
+        
         return Inertia::render('Employee/OvertimeRequest/Index', [
-            'overtime_requests' => OvertimeRequest::query()
-            ->with('employee', 'adminChecked')
-            ->get()
-            ->map(function ($overtime){
-                
-                return [
-                    'id' => $overtime->id,
-                    'employee' => $overtime->employee->full_name,
-                    'overtime_at' => date("F j, Y", strtotime($overtime->overtime_at)),
-                    'time_rage' => date("g:i a", strtotime($overtime->from)).' to '. date("g:i a", strtotime($overtime->to)),
-                    'status_id' => $overtime->status_id,
-                    'status' => $overtime->status->label,
-                    'checked_by' => $overtime->checked_by,
-                    'admin_checked' => $overtime->adminChecked->name ?? 'Not yet check',
-                    'actions' => [
-                        'edit' => route('overtimerequests.edit', $overtime)
-                    ]
-                ];
-            })
+            'overtime_requests' => $overtime_requests
         ]);
     }
 
@@ -61,7 +71,10 @@ class OvertimeRequestController extends Controller
     public function edit(OvertimeRequest $overtime): Response
     {
         return Inertia::render('Employee/OvertimeRequest/Edit', [
-            'overtime' => $overtime
+            'overtime' => $overtime,
+            'actions' => [
+                'can_check' => auth()->user()->isAdmin()
+            ]
         ]);
     }
 

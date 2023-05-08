@@ -14,7 +14,7 @@ import Button from '@/Components/Button';
 import { Head, useForm, router, Link } from '@inertiajs/react';
 import { useState } from 'react';
 
-export default function Create(props) {
+export default function Edit(props) {
     const [approveModal, showApproveModal] = useState(false);
 
     const [approvedHours, setApprovedHours] = useState(0)
@@ -42,11 +42,11 @@ export default function Create(props) {
         });
     };
 
-    const actions = props.overtime.status_id === 1 ?
+    const actions = props.overtime.status_id === 1 && props.actions.can_check ?
                 <>
                     <PrimaryButton disabled={processing}>Update</PrimaryButton>
                     <Button type="button" className="p-2 rounded text-white bg-green-500 hover:bg-green-600" onClick={() => showApproveModal(true)}>Checked</Button>
-                </> : <h4>No actions</h4>
+                </> : ( props.overtime.status_id !== 1 ? <h4>No actions</h4> : <PrimaryButton disabled={processing}>Update</PrimaryButton>)
 
     return (
         <AuthenticatedLayout

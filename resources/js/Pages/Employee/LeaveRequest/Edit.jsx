@@ -43,11 +43,11 @@ export default function Create(props) {
         });
     };
 
-    const actions = props.leave.status_id === 1 ?
+    const actions = props.leave.status_id === 1 && props.actions.can_check ?
                 <>
                     <PrimaryButton disabled={processing}>Update</PrimaryButton>
                     <Button type="button" className="p-2 rounded text-white bg-green-500 hover:bg-green-600" onClick={() => showApproveModal(true)}>Check</Button>
-                </> : <h4>No actions</h4>
+                </> : ( props.leave.status_id !== 1 ? <h4>No actions</h4> : <PrimaryButton disabled={processing}>Update</PrimaryButton> )
 
     return (
         <AuthenticatedLayout

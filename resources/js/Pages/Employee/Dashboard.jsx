@@ -40,32 +40,20 @@ export default function EmployeeDashboard(props) {
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-4 grid grid-cols-1 md:grid-cols-4 gap-4">
                             <CardWidget className="bg-green-400">
-                                <p className="mb-2 text-3xl font-bold">{props.data.branch_count}</p>
-                                <p className="text-xl font-bold">Total Branch</p>
+                                <p className="mb-2 text-3xl font-bold">{props.data.total_pay}</p>
+                                <p className="text-xl font-bold">Total Pay</p>
                             </CardWidget>
                             <CardWidget className="bg-yellow-400">
-                                <p className="mb-2 text-3xl font-bold">{props.data.department_count}</p>
-                                <p className="text-xl font-bold">Total Department</p>
-                            </CardWidget>
-                            <CardWidget className="bg-red-400">
-                                <p className="mb-2 text-3xl font-bold">{props.data.employee_count}</p>
-                                <p className="text-xl font-bold">Total Employees</p>
-                            </CardWidget>
-                            <CardWidget className="bg-green-400">
                                 <p className="mb-2 text-3xl font-bold">{props.data.attendance_count}</p>
                                 <p className="text-xl font-bold">Today Attendance</p>
                             </CardWidget>
-                            <CardWidget className="bg-yellow-400">
+                            <CardWidget className="bg-red-400">
                                 <p className="mb-2 text-3xl font-bold">{props.data.overtime_count}</p>
                                 <p className="text-xl font-bold">Total Overtime Requests</p>
                             </CardWidget>
-                            <CardWidget className="bg-red-400">
+                            <CardWidget className="bg-green-400">
                                 <p className="mb-2 text-3xl font-bold">{props.data.leave_count}</p>
                                 <p className="text-xl font-bold">Total Leave Requests</p>
-                            </CardWidget>
-                            <CardWidget className="bg-green-400">
-                                <p className="mb-2 text-3xl font-bold">{props.data.payroll_count}</p>
-                                <p className="text-xl font-bold">Total Payroll</p>
                             </CardWidget>
                         </div>
                     </div>

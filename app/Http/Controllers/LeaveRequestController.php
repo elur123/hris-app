@@ -16,27 +16,37 @@ class LeaveRequestController extends Controller
 {
     public function index(): Response
     {
+        $user = auth()->user();
+
+        $leave_requests = LeaveRequest::query()
+        ->with('employee', 'checkedBy', 'status', 'leaveType')
+        ->get()
+        ->map(function ($leave){
+            
+            return [
+                'id' => $leave->id,
+                'employee_id' => $leave->employee_id,
+                'employee' => $leave->employee->full_name,
+                'leave_range' => date("F j, Y", strtotime($leave->from)) .' - '. date("F j, Y", strtotime($leave->to)),
+                'notes' => $leave->notes,
+                'leave_type_id' => $leave->leave_type_id,
+                'type' => $leave->leaveType->label,
+                'status_id' => $leave->status_id,
+                'status' => $leave->status->label,
+                'admin_checked' => $leave->checkedBy->name ?? 'Not yet check',
+                'actions' => [
+                    'edit' => route('leaverequests.edit', $leave)
+                ]
+            ];
+        });
+
+        if ($user->isEmployee()) 
+        {
+            $leave_requests = collect($leave_requests)->where('employee_id', $user->employee->id)->values();
+        }
+
         return Inertia::render('Employee/LeaveRequest/Index', [
-            'leave_requests' => LeaveRequest::query()
-            ->with('employee', 'checkedBy', 'status', 'leaveType')
-            ->get()
-            ->map(function ($leave){
-                
-                return [
-                    'id' => $leave->id,
-                    'employee' => $leave->employee->full_name,
-                    'leave_range' => date("F j, Y", strtotime($leave->from)) .' - '. date("F j, Y", strtotime($leave->to)),
-                    'notes' => $leave->notes,
-                    'leave_type_id' => $leave->leave_type_id,
-                    'type' => $leave->leaveType->label,
-                    'status_id' => $leave->status_id,
-                    'status' => $leave->status->label,
-                    'admin_checked' => $leave->checkedBy->name ?? 'Not yet check',
-                    'actions' => [
-                        'edit' => route('leaverequests.edit', $leave)
-                    ]
-                ];
-            })
+            'leave_requests' => $leave_requests
         ]);
     }
 
@@ -63,7 +73,10 @@ class LeaveRequestController extends Controller
     {
         return Inertia::render('Employee/LeaveRequest/Edit', [
             'types' => LeaveType::all(),
-            'leave' => $leave
+            'leave' => $leave,
+            'actions' => [
+                'can_check' => auth()->user()->isAdmin()
+            ]
         ]);
     }
 

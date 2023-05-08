@@ -17,6 +17,7 @@ use App\Http\Controllers\LeaveRequestController;
 use App\Http\Controllers\PayrollController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PayListController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -136,6 +137,10 @@ Route::middleware('auth')->group(function () {
         Route::post('/store', [HolidayController::class, 'store'])->name('store');
         Route::get('/{holiday}', [HolidayController::class, 'edit'])->name('edit');
         Route::put('/{holiday}', [HolidayController::class, 'update'])->name('update');
+    });
+
+    Route::prefix('paylists')->name('paylists.')->group(function () {
+        Route::get('/', [PayListController::class, 'index'])->name('index');
     });
 });
 
